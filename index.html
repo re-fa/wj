@@ -139,7 +139,7 @@ body:not([data-v=wiz]) .bar{display:none}
   </div>
 
   <div class="step panel" id="step-5">
-    <div class="field"><label for="u-pub">بواسطة</label><input type="text" id="u-pub" value="رضا محمد"></div>
+    <div class="field"><label for="u-pub">بواسطة</label><div class="period"><input type="text" id="u-pub" readonly><button class="icon-btn" type="button" id="pub-pen" aria-label="كتابة يدوية"><span class="material-icons-round" aria-hidden="true">edit</span></button></div></div>
     <div class="field"><label for="u-role">المنصب</label><select id="u-role"></select></div>
     <div><label for="u-contact">التواصل (Telegram)</label><input type="text" id="u-contact" placeholder="@username" dir="ltr"></div>
   </div>
@@ -155,7 +155,7 @@ body:not([data-v=wiz]) .bar{display:none}
 <div class="drawer-bg" id="drawer-bg" onclick="closeSheet()">
   <div class="drawer" onclick="event.stopPropagation()">
     <div class="grab"></div>
-    <h3>اختر المادة</h3>
+    <h3 id="drawer-title">اختر المادة</h3>
     <div class="opts" id="opts"></div>
   </div>
 </div>
@@ -167,6 +167,11 @@ body:not([data-v=wiz]) .bar{display:none}
 /* ====== البيانات: عدّلها هنا مباشرة ====== */
 const SUBJECTS = ['التربية الإسلامية','اللغة العربية','اللغة الإنجليزية','الرياضيات','الأحياء','الكيمياء','الفيزياء','التربية الفنية','الرياضة'];
 const ROLES = ['مدير القناة','المشرف الأول','المشرف الثاني','المشرف'];
+// الناشرون: الاسم + اليوزر (خانة التواصل) + المنصب اختيارياً. بدون role يُستخدم أول منصب في ROLES.
+const PUBLISHERS = [
+  { name: 'رضا محمد',      user: '@r_g7f' },
+  { name: 'عبدالله صعيو', user: '@spki4', role: 'المشرف الأول' },
+];
 const SCHEDULE = {
   'الأحد':    ['التربية الإسلامية','اللغة العربية','الرياضيات','الفيزياء','اللغة الإنجليزية','الرياضة'],
   'الاثنين':  ['اللغة العربية','الرياضيات','الكيمياء','الأحياء','اللغة الإنجليزية','التربية الفنية'],
@@ -272,7 +277,7 @@ function loadSchedule() {
   $('u-lessons').replaceChildren(...[1, 2, 3, 4, 5, 6].map(i => {
     const inp = h('input', { type: 'text', id: 'ul-' + i, readonly: '', 'aria-label': 'الدرس ' + i });
     inp.value = L[i - 1] || 'لا يوجد';
-    inp.addEventListener('click', () => { if (inp.hasAttribute('readonly')) openSheet(i); });
+    inp.addEventListener('click', () => { if (inp.hasAttribute('readonly')) openSheet('ul-' + i, [...SUBJECTS, 'لا يوجد'], 'اختر المادة'); });
     inp.addEventListener('blur', () => inp.setAttribute('readonly', ''));
     const pen = h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'كتابة يدوية', onclick: () => {
       inp.removeAttribute('readonly'); inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length);
@@ -280,13 +285,19 @@ function loadSchedule() {
     return h('div', { class: 'period' }, h('span', { class: 'num', text: i }), inp, pen);
   }));
 }
-function openSheet(i) {
-  editing = i;
-  const now = $('ul-' + i).value;
-  $('opts').replaceChildren(...[...SUBJECTS, 'لا يوجد'].map(s =>
+function openSheet(id, list, title, onPick) {
+  const now = $(id).value;
+  $('drawer-title').textContent = title;
+  $('opts').replaceChildren(...list.map(s =>
     h('button', { class: 'opt' + (s === now ? ' sel' : ''), type: 'button', text: s,
-      onclick: () => { $('ul-' + editing).value = s; closeSheet(); } })));
+      onclick: () => { $(id).value = s; if (onPick) onPick(s); closeSheet(); } })));
   $('drawer-bg').classList.add('on');
+}
+function pickPublisher(name) {
+  const p = PUBLISHERS.find(x => x.name === name);
+  if (!p) return;
+  $('u-contact').value = p.user;
+  $('u-role').value = p.role || ROLES[0];
 }
 function closeSheet() { $('drawer-bg').classList.remove('on'); }
 
@@ -364,6 +375,14 @@ async function copyResult() {
   $('g-y').replaceChildren(...[y - 1, y, y + 1, y + 2].map(v => opt(v)));
   $('u-day').replaceChildren(...DAYS.map(d => opt(d)));
   $('u-role').replaceChildren(...ROLES.map(r => opt(r)));
+  const pub = $('u-pub');
+  pub.value = PUBLISHERS[0] ? PUBLISHERS[0].name : '';
+  if (PUBLISHERS[0]) pickPublisher(PUBLISHERS[0].name);
+  pub.addEventListener('click', () => { if (pub.hasAttribute('readonly')) openSheet('u-pub', PUBLISHERS.map(p => p.name), 'اختر الناشر', pickPublisher); });
+  pub.addEventListener('blur', () => pub.setAttribute('readonly', ''));
+  $('pub-pen').addEventListener('click', () => {
+    pub.removeAttribute('readonly'); pub.focus(); pub.setSelectionRange(pub.value.length, pub.value.length);
+  });
   setDate(1);
 
   const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
