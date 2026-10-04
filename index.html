@@ -2,129 +2,164 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>واجبات باچر 📚</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>واجبات باچر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
 <style>
-:root{--bg:#f8fafc;--surface:#fff;--text:#0f172a;--primary:#2563eb;--border:#e2e8f0;--danger:#ef4444;--success:#10b981}
-.dark-mode{--bg:#020617;--surface:#0f172a;--text:#f8fafc;--primary:#3b82f6;--border:#1e293b}
-*{box-sizing:border-box;outline:none;font-family:'Tajawal',system-ui,'Segoe UI',Tahoma,sans-serif;transition:background .3s,color .3s}
-body{margin:0;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
-.app-view{display:none;flex-direction:column;min-height:100vh}
-.app-view.active{display:flex}
-.splash{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
-.splash-logo{width:130px;height:130px;border-radius:30px;background:var(--surface);border:1px solid var(--border);box-shadow:0 10px 25px rgba(0,0,0,.1);margin-bottom:20px;display:flex;align-items:center;justify-content:center;font-size:64px}
-.header{padding:15px 20px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
-.container{max-width:550px;margin:0 auto;padding:20px;width:100%}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:25px;margin-bottom:20px;box-shadow:0 4px 6px -1px rgba(0,0,0,.05)}
-h2{margin-top:0;color:var(--primary);font-size:20px;border-bottom:2px dashed var(--border);padding-bottom:15px}
-label{display:block;font-weight:700;margin-bottom:8px;font-size:14px;opacity:.8}
-input,select,textarea{width:100%;padding:14px;border-radius:12px;border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-size:15px;font-weight:500;margin-bottom:15px}
-.date-row{display:flex;gap:8px;margin-bottom:15px;width:100%}
-.date-row select{margin-bottom:0;padding:12px 4px;text-align:center}
-.d-day{flex:1}.d-month{flex:2.5}.d-year{flex:1.5}
-.lesson-input-wrap{display:flex;gap:8px;align-items:center;margin-bottom:12px}
-.lesson-input-wrap input{margin-bottom:0;flex:1}
-input[readonly]{cursor:pointer}
-.edit-btn{background:var(--primary);color:#fff;border:none;padding:12px;border-radius:12px;cursor:pointer;font-size:16px}
-.btn{width:100%;padding:16px;border-radius:14px;border:none;font-weight:800;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px}
-.btn-primary{background:var(--primary);color:#fff}
-.btn-success{background:var(--success);color:#fff;margin-bottom:20px}
-.btn-outline{background:transparent;border:2px solid var(--primary);color:var(--primary)}
-.btn-danger{background:rgba(239,68,68,.1);border:1px solid var(--danger);color:var(--danger);padding:10px;font-size:14px;margin-top:5px}
-.btn.sm{width:auto;padding:6px 12px;font-size:12px;border-radius:8px}
-.step{display:none;animation:slideIn .3s ease}
-.step.active{display:block}
-@keyframes slideIn{from{opacity:0;transform:translateX(-15px)}to{opacity:1;transform:translateX(0)}}
-@media (prefers-reduced-motion:reduce){.step{animation:none}}
-.box{background:var(--bg);padding:15px;border-radius:12px;border:1px solid var(--border);margin-bottom:15px}
-#result-box{background:#0f172a;color:#f8fafc;padding:20px;border-radius:15px;white-space:pre-wrap;line-height:1.5;font-size:14px;text-align:right}
-#modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;align-items:center;justify-content:center;padding:20px}
-#modal .card{width:100%;max-width:400px;max-height:80vh;overflow-y:auto;margin:0}
-#modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.footer{padding:20px;text-align:center;border-top:1px solid var(--border);font-weight:700;opacity:.8;margin-top:auto}
+:root{--bg:#EBF0F6;--sheet:#fff;--ink:#0F1B33;--muted:#5B6B86;--line:#D5DDEA;--field:#F4F7FB;--pri:#2447C8;--on-pri:#fff;--hl:#FFD84D;--danger:#C6362F;--bubble:#14213D;--bubble-ink:#EEF3FF}
+:root.dark{--bg:#0A1020;--sheet:#121A2E;--ink:#E8EEFB;--muted:#93A1BD;--line:#24304B;--field:#0C1427;--pri:#7C97FF;--on-pri:#0A1020;--danger:#FF8A80;--bubble:#1B2A4A}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--ink);font:500 16px/1.6 'IBM Plex Sans Arabic',system-ui,sans-serif;min-height:100vh;padding-bottom:calc(24px + env(safe-area-inset-bottom))}
+body[data-v=wiz]{padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+h1,h2,h3,.brand{font-family:Cairo,'IBM Plex Sans Arabic',sans-serif}
+.material-icons-round{font-size:22px;visibility:hidden}
+.icons .material-icons-round{visibility:visible}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
+.logo{width:38px;height:38px;border-radius:11px;background:var(--pri);color:var(--on-pri);display:grid;place-items:center}
+.icon-btn{width:44px;height:44px;border:1.5px solid var(--line);background:var(--field);color:var(--ink);border-radius:12px;display:grid;place-items:center;cursor:pointer;flex:none}
+.icon-btn.danger{color:var(--danger)}
+.view{display:none}.view.on{display:block}
+.hero{padding:40px 0 24px}
+h1{font-weight:800;font-size:36px;line-height:1.25;margin-bottom:12px}
+.lead{color:var(--muted);max-width:34ch;margin-bottom:28px}
+.next-card{display:flex;align-items:center;gap:14px;padding:16px;margin-bottom:20px;background:var(--sheet);border:1.5px solid var(--line);border-radius:18px}
+.next-card .logo{background:var(--field);color:var(--pri);border:1.5px solid var(--line)}
+.next-card small{display:block;color:var(--muted);font-size:14px}
+.hl{display:inline-block;font-weight:600;font-size:18px;line-height:1.5;color:#0F1B33;background:var(--hl);padding:2px 10px;border-radius:8px}
+.credit{text-align:center;color:var(--muted);font-size:14px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 20px;border-radius:14px;border:1.5px solid transparent;font:600 16px 'IBM Plex Sans Arabic',sans-serif;cursor:pointer}
+.btn.pri{background:var(--pri);color:var(--on-pri)}
+.btn.ghost{background:var(--sheet);border-color:var(--line);color:var(--ink)}
+.btn.big{width:100%;height:58px;font-size:17px}
+.btn:focus-visible,.icon-btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.opt:focus-visible{outline:3px solid color-mix(in srgb,var(--pri) 50%,transparent);outline-offset:2px}
+.prog{display:flex;gap:6px;margin:16px 0 14px}
+.prog i{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.prog i.on{background:var(--pri)}
+.ptitle{margin-bottom:14px}
+.ptitle small{color:var(--muted);font-size:14px}
+.ptitle h2{font-weight:800;font-size:25px;line-height:1.3}
+.step{display:none}.step.on{display:block}
+.panel{background:var(--sheet);border:1.5px solid var(--line);border-radius:18px;padding:20px}
+label{display:block;font-weight:600;font-size:14px;color:var(--muted);margin:0 0 6px}
+input,select,textarea{width:100%;font:500 16px 'IBM Plex Sans Arabic',sans-serif;color:var(--ink);background:var(--field);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px}
+select{appearance:none;padding-left:38px;background:var(--field) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%237B8BA6' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat left 12px center}
+textarea{resize:vertical;min-height:84px}
+.field{margin-bottom:16px}
+.quick{display:flex;gap:8px;margin-bottom:18px}
+.chip{height:40px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:var(--field);color:var(--ink);font:600 15px 'IBM Plex Sans Arabic',sans-serif;cursor:pointer}
+.chip.on{background:var(--pri);border-color:var(--pri);color:var(--on-pri)}
+.date-row{display:grid;grid-template-columns:1fr 2fr 1.4fr;gap:8px}
+.hint{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:14px;margin-top:14px}
+.periods{display:grid;gap:10px;margin-top:14px}
+.period{display:flex;gap:10px;align-items:center}
+.num{width:36px;height:36px;border-radius:10px;background:var(--field);border:1.5px solid var(--line);display:grid;place-items:center;font:800 15px Cairo,sans-serif;flex:none}
+.period input{cursor:pointer}
+.entry{border:1.5px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:10px;margin-bottom:12px;background:var(--field)}
+.entry input,.entry select,.entry textarea{background:var(--sheet)}
+.entry-head{display:flex;gap:8px}
+.empty{display:flex;flex-direction:column;align-items:center;gap:4px;padding:22px;margin-bottom:12px;border:1.5px dashed var(--line);border-radius:14px;color:var(--muted);text-align:center}
+.bubble{background:var(--bubble);color:var(--bubble-ink);border-radius:18px 18px 5px 18px;padding:18px;white-space:pre-wrap;word-break:break-word;line-height:1.75;font-size:15px}
+.bar{position:fixed;inset:auto 0 0 0;z-index:30;background:var(--sheet);border-top:1.5px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+.bar-in{max-width:560px;margin:0 auto;display:flex;gap:10px}
+.bar-in .ghost{flex:0 0 auto}.bar-in .pri{flex:1}
+body:not([data-v=wiz]) .bar{display:none}
+.drawer-bg{position:fixed;inset:0;z-index:50;background:rgba(5,10,25,.55);display:none;align-items:flex-end;justify-content:center}
+.drawer-bg.on{display:flex}
+.drawer{width:100%;max-width:560px;max-height:80vh;overflow:auto;background:var(--sheet);border-radius:22px 22px 0 0;padding:12px 16px calc(20px + env(safe-area-inset-bottom));animation:up .22s ease-out}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.grab{width:40px;height:4px;border-radius:2px;background:var(--line);margin:0 auto 14px}
+.drawer h3{font-weight:800;font-size:20px;margin-bottom:12px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{height:48px;border-radius:12px;border:1.5px solid var(--line);background:var(--field);color:var(--ink);font:500 15px 'IBM Plex Sans Arabic',sans-serif;cursor:pointer}
+.opt.sel{border-color:var(--pri);background:color-mix(in srgb,var(--pri) 14%,var(--sheet));font-weight:600}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translate(-50%,10px);z-index:60;display:flex;align-items:center;gap:8px;background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:15px;opacity:0;pointer-events:none;transition:.25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
-<body>
+<body data-v="home">
 
-<div id="view-splash" class="app-view active">
-  <div class="header">
-    <b>📚 النظام الرئيسي</b>
-    <button class="btn btn-outline sm" onclick="toggleTheme()"><span id="theme-icon">🌙</span></button>
-  </div>
-  <div class="splash">
-    <div class="splash-logo">📚</div>
-    <h1 style="margin:0 0 5px;font-weight:900">واجبات باچر 📚</h1>
-    <p style="margin-bottom:30px;font-weight:700;opacity:.6">برمجة وتطوير : رضا محمد</p>
-    <div style="width:85%;max-width:320px">
-      <button class="btn btn-primary" onclick="startUser()">✍️ إنشاء منشور جديد</button>
+<header class="top">
+  <div class="brand"><span class="logo"><span class="material-icons-round">menu_book</span></span>واجبات باچر</div>
+  <button class="icon-btn" id="theme-btn" aria-label="تبديل المظهر" onclick="toggleTheme()"></button>
+</header>
+
+<section id="view-home" class="view on wrap">
+  <div class="hero">
+    <h1>منشور الواجبات اليومي</h1>
+    <p class="lead">جهّز جدول الدروس والواجبات والامتحانات في منشور جاهز للنسخ إلى قناتك.</p>
+    <div class="next-card">
+      <span class="logo"><span class="material-icons-round">event</span></span>
+      <div><small>تاريخ المنشور القادم</small><span class="hl" id="home-next"></span></div>
     </div>
+    <button class="btn pri big" onclick="start()">ابدأ المنشور<span class="material-icons-round">arrow_back</span></button>
+    <p class="credit">برمجة وتطوير : رضا محمد</p>
   </div>
-</div>
+</section>
 
-<div id="view-user" class="app-view">
-  <div class="header">
-    <b>✍️ إنشاء منشور</b>
-    <button class="btn btn-outline sm" onclick="setView('view-splash')">خروج</button>
-  </div>
-  <main class="container">
-    <div id="step-1" class="step active"><div class="card">
-      <h2>📅 الزمان والتاريخ</h2>
-      <label>يوم الأسبوع</label>
-      <select id="u-day" onchange="loadSchedule()"></select>
-      <label>التاريخ الميلادي</label>
-      <div class="date-row"><select id="g-d" class="d-day"></select><select id="g-m" class="d-month"></select><select id="g-y" class="d-year"></select></div>
-      <label>التاريخ الهجري</label>
-      <div class="date-row"><select id="h-d" class="d-day"></select><select id="h-m" class="d-month"></select><select id="h-y" class="d-year"></select></div>
-      <button class="btn btn-primary" onclick="go(2)">جدول الدروس ←</button>
-    </div></div>
+<section id="view-wiz" class="view wrap">
+  <div class="prog" id="prog"></div>
+  <div class="ptitle"><small id="p-count"></small><h2 id="p-title"></h2></div>
 
-    <div id="step-2" class="step"><div class="card">
-      <h2>📖 جدول الدروس</h2>
-      <div id="u-lessons"></div>
-      <button class="btn btn-primary" onclick="go(3)">الواجبات ←</button>
-    </div></div>
-
-    <div id="step-3" class="step"><div class="card">
-      <h2>✏️ الواجبات اليومية</h2>
-      <div id="hw-list"></div>
-      <button class="btn btn-outline" style="margin-bottom:20px;padding:12px" onclick="addBox('hw')">+ إضافة واجب جديد</button>
-      <button class="btn btn-primary" onclick="go(4)">الامتحانات ←</button>
-    </div></div>
-
-    <div id="step-4" class="step"><div class="card">
-      <h2>⚠️ الامتحانات</h2>
-      <div id="ex-list"></div>
-      <button class="btn btn-outline" style="margin-bottom:20px;padding:12px" onclick="addBox('ex')">+ إضافة امتحان جديد</button>
-      <button class="btn btn-primary" onclick="go(5)">الناشر ←</button>
-    </div></div>
-
-    <div id="step-5" class="step"><div class="card">
-      <h2>👤 بيانات الناشر</h2>
-      <label>بواسطة</label>
-      <input type="text" id="u-pub" value="رضا محمد">
-      <label>المنصب</label>
-      <select id="u-role"></select>
-      <label>التواصل (Telegram)</label>
-      <input type="text" id="u-contact" placeholder="@username" dir="ltr">
-      <button class="btn btn-primary" onclick="generate()">توليد الكليشة النهائية ✔</button>
-    </div></div>
-
-    <div id="step-6" class="step">
-      <button class="btn btn-success" onclick="copyResult()">📋 نسخ النص بالكامل</button>
-      <div id="result-box"></div>
-      <button class="btn btn-outline" style="margin-top:20px" onclick="location.reload()">منشور جديد</button>
+  <div class="step panel" id="step-1">
+    <div class="quick">
+      <button class="chip" data-off="0" onclick="setDate(0)">اليوم</button>
+      <button class="chip" data-off="1" onclick="setDate(1)">غداً</button>
     </div>
-  </main>
-  <div class="footer">رضا محمد © واجبات باچر</div>
-</div>
+    <div class="field"><label for="u-day">يوم الأسبوع</label><select id="u-day" onchange="loadSchedule()"></select></div>
+    <label>التاريخ</label>
+    <div class="date-row">
+      <select id="g-d" aria-label="اليوم" onchange="dateChanged()"></select>
+      <select id="g-m" aria-label="الشهر" onchange="dateChanged()"></select>
+      <select id="g-y" aria-label="السنة" onchange="dateChanged()"></select>
+    </div>
+    <p class="hint"><span class="material-icons-round">info</span><span id="date-hint"></span></p>
+  </div>
 
-<div id="modal">
-  <div class="card">
+  <div class="step panel" id="step-2">
+    <p class="hint" style="margin:0"><span class="material-icons-round">touch_app</span>انقر على المادة لاختيارها من القائمة، أو على القلم للكتابة بنفسك.</p>
+    <div class="periods" id="u-lessons"></div>
+  </div>
+
+  <div class="step panel" id="step-3">
+    <div class="empty" id="hw-empty"><span class="material-icons-round">edit_note</span>لا توجد واجبات بعد</div>
+    <div id="hw-list"></div>
+    <button class="btn ghost big" onclick="addBox('hw')"><span class="material-icons-round">add</span>إضافة واجب</button>
+  </div>
+
+  <div class="step panel" id="step-4">
+    <div class="empty" id="ex-empty"><span class="material-icons-round">quiz</span>لا توجد امتحانات بعد</div>
+    <div id="ex-list"></div>
+    <button class="btn ghost big" onclick="addBox('ex')"><span class="material-icons-round">add</span>إضافة امتحان</button>
+  </div>
+
+  <div class="step panel" id="step-5">
+    <div class="field"><label for="u-pub">بواسطة</label><input type="text" id="u-pub" value="رضا محمد"></div>
+    <div class="field"><label for="u-role">المنصب</label><select id="u-role"></select></div>
+    <div><label for="u-contact">التواصل (Telegram)</label><input type="text" id="u-contact" placeholder="@username" dir="ltr"></div>
+  </div>
+
+  <div class="step" id="step-6"><div class="bubble" id="result"></div></div>
+</section>
+
+<nav class="bar"><div class="bar-in">
+  <button class="btn ghost" id="b-prev"></button>
+  <button class="btn pri" id="b-next"></button>
+</div></nav>
+
+<div class="drawer-bg" id="drawer-bg" onclick="closeSheet()">
+  <div class="drawer" onclick="event.stopPropagation()">
+    <div class="grab"></div>
     <h3>اختر المادة</h3>
-    <div id="modal-grid"></div>
-    <button class="btn btn-outline" style="margin-top:20px" onclick="closeModal()">إلغاء</button>
+    <div class="opts" id="opts"></div>
   </div>
 </div>
+<div class="toast" id="toast"></div>
 
 <script>
 'use strict';
@@ -144,11 +179,12 @@ const SCHEDULE = {
 /* ======================================= */
 
 const DAYS = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-const G_MONTHS = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-const H_MONTHS = ['محرم','صفر','ربيع الأول','ربيع الآخر','جمادى الأولى','جمادى الآخرة','رجب','شعبان','رمضان','شوال','ذو القعدة','ذو الحجة'];
-const LINE = '•'.repeat(40);
+const MONTHS = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const TITLES = ['الزمان والتاريخ','جدول الدروس','الواجبات','الامتحانات','بيانات الناشر','المنشور جاهز'];
+const DIV = '━'.repeat(16), RLM = '\u200F', NONE = '☆ لا يوجد واجبات/امتحانات ☆';
+const SEP = '='.repeat(10), ORD = ['أولاً','ثانياً','ثالثاً','رابعاً','خامساً','سادساً','سابعاً','ثامناً','تاسعاً','عاشراً'];
 const $ = id => document.getElementById(id);
-let editing = null;
+let cur = 1, editing = null, toastTimer;
 
 // إنشاء عناصر DOM بأمان (بدون innerHTML)
 function h(tag, attrs = {}, ...kids) {
@@ -161,133 +197,177 @@ function h(tag, attrs = {}, ...kids) {
   kids.flat().forEach(c => e.append(c));
   return e;
 }
+const ic = n => h('span', { class: 'material-icons-round', 'aria-hidden': 'true', text: n });
 const opt = (v, t = v) => h('option', { value: v, text: t });
+const fmt = d => `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
 
-function setView(id) {
-  document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
-  $(id).classList.add('active');
-  window.scrollTo(0, 0);
-}
-function go(n) {
-  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-  $('step-' + n).classList.add('active');
-  window.scrollTo(0, 0);
-}
-
-// ---------- الثيم ----------
-function applyTheme() {
-  let dark = false;
-  try { dark = localStorage.getItem('theme') === 'dark'; } catch {}
-  document.body.classList.toggle('dark-mode', dark);
-  $('theme-icon').textContent = dark ? '☀️' : '🌙';
+// ---------- المظهر ----------
+function applyTheme(dark) {
+  document.documentElement.classList.toggle('dark', dark);
+  $('theme-btn').replaceChildren(ic(dark ? 'light_mode' : 'dark_mode'));
 }
 function toggleTheme() {
-  const dark = !document.body.classList.contains('dark-mode');
+  const dark = !document.documentElement.classList.contains('dark');
+  applyTheme(dark);
   try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch {}
-  applyTheme();
 }
 
-// ---------- التواريخ ----------
-function todayHijri(now) {
-  try {
-    const p = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn', { day: 'numeric', month: 'numeric', year: 'numeric' }).formatToParts(now);
-    const g = t => parseInt(p.find(x => x.type === t).value, 10);
-    const r = { d: g('day'), m: g('month'), y: g('year') };
-    if (r.d && r.m && r.y) return r;
-  } catch {}
-  return { d: 1, m: 1, y: 1448 };
+// ---------- التنقل ----------
+function view(v) {
+  document.body.dataset.v = v;
+  document.querySelectorAll('.view').forEach(e => e.classList.toggle('on', e.id === 'view-' + v));
+  window.scrollTo(0, 0);
 }
-function buildDates() {
-  const now = new Date(), hj = todayHijri(now), gy = now.getFullYear();
-  const nums = n => Array.from({ length: n }, (_, i) => i + 1);
-  const years = y => [y - 1, y, y + 1, y + 2];
-  $('g-d').replaceChildren(...nums(31).map(x => opt(x)));
-  $('h-d').replaceChildren(...nums(30).map(x => opt(x)));
-  $('g-m').replaceChildren(...G_MONTHS.map((m, i) => opt(m, `${m} ( ${i + 1} )`)));
-  $('h-m').replaceChildren(...H_MONTHS.map((m, i) => opt(m, `${m} ( ${i + 1} )`)));
-  $('g-y').replaceChildren(...years(gy).map(x => opt(x)));
-  $('h-y').replaceChildren(...years(hj.y).map(x => opt(x)));
-  $('u-day').replaceChildren(...DAYS.map(d => opt(d)));
-  $('u-day').value = DAYS[now.getDay()];
-  $('g-d').value = now.getDate(); $('g-m').value = G_MONTHS[now.getMonth()]; $('g-y').value = gy;
-  $('h-d').value = Math.min(hj.d, 30); $('h-m').value = H_MONTHS[hj.m - 1]; $('h-y').value = hj.y;
+function start() { view('wiz'); go(1); }
+function go(n) { cur = n; render(); window.scrollTo(0, 0); }
+function render() {
+  document.querySelectorAll('.step').forEach((s, i) => s.classList.toggle('on', i + 1 === cur));
+  $('p-title').textContent = TITLES[cur - 1];
+  $('p-count').textContent = cur < 6 ? `الخطوة ${cur} من 5` : 'اكتملت الخطوات';
+  $('prog').replaceChildren(...[1, 2, 3, 4, 5].map(i => h('i', { class: i <= cur ? 'on' : '' })));
+  const prev = $('b-prev'), next = $('b-next');
+  prev.replaceChildren(ic(cur === 1 ? 'home' : cur === 6 ? 'restart_alt' : 'arrow_forward'), cur === 1 ? 'الرئيسية' : cur === 6 ? 'منشور جديد' : 'السابق');
+  prev.onclick = () => cur === 1 ? view('home') : cur === 6 ? location.reload() : go(cur - 1);
+  if (cur < 5) { next.replaceChildren('التالي', ic('arrow_back')); next.onclick = () => go(cur + 1); }
+  else if (cur === 5) { next.replaceChildren(ic('auto_awesome'), 'توليد المنشور'); next.onclick = generate; }
+  else { next.replaceChildren(ic('content_copy'), 'نسخ المنشور'); next.onclick = copyResult; }
+}
+function toast(msg) {
+  const t = $('toast');
+  t.replaceChildren(ic('check_circle'), msg);
+  t.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('on'), 2200);
 }
 
-// ---------- الواجهة ----------
-function startUser() {
-  $('u-role').replaceChildren(...ROLES.map(r => opt(r)));
-  setView('view-user'); go(1);
-  loadSchedule();
+// ---------- التاريخ ----------
+function fillDays() {
+  const y = +$('g-y').value, m = MONTHS.indexOf($('g-m').value);
+  const n = new Date(y, m + 1, 0).getDate(), keep = Math.min(+$('g-d').value || 1, n);
+  $('g-d').replaceChildren(...Array.from({ length: n }, (_, i) => opt(i + 1)));
+  $('g-d').value = keep;
 }
+function markChip(off) {
+  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', +c.dataset.off === off));
+  $('date-hint').textContent = off === 1 ? 'ضُبط التاريخ تلقائياً على الغد.' : off === 0 ? 'ضُبط التاريخ على اليوم.' : 'تاريخ مخصص، ويتبعه يوم الأسبوع تلقائياً.';
+}
+function setDate(off) {
+  const d = new Date(); d.setDate(d.getDate() + off);
+  $('g-y').value = d.getFullYear(); $('g-m').value = MONTHS[d.getMonth()];
+  fillDays(); $('g-d').value = d.getDate();
+  $('u-day').value = DAYS[d.getDay()];
+  markChip(off); loadSchedule();
+}
+function dateChanged() {
+  fillDays();
+  const d = new Date(+$('g-y').value, MONTHS.indexOf($('g-m').value), +$('g-d').value);
+  $('u-day').value = DAYS[d.getDay()];
+  markChip(null); loadSchedule();
+}
+
+// ---------- الدروس ----------
 function loadSchedule() {
-  const lessons = SCHEDULE[$('u-day').value] || [];
-  const box = $('u-lessons'); box.replaceChildren();
-  for (let i = 1; i <= 6; i++) {
-    const inp = h('input', { type: 'text', id: 'ul-' + i, readonly: '' });
-    inp.value = lessons[i - 1] || 'لا يوجد';
-    inp.addEventListener('click', () => { if (inp.hasAttribute('readonly')) openModal(i); });
+  const L = SCHEDULE[$('u-day').value] || [];
+  $('u-lessons').replaceChildren(...[1, 2, 3, 4, 5, 6].map(i => {
+    const inp = h('input', { type: 'text', id: 'ul-' + i, readonly: '', 'aria-label': 'الدرس ' + i });
+    inp.value = L[i - 1] || 'لا يوجد';
+    inp.addEventListener('click', () => { if (inp.hasAttribute('readonly')) openSheet(i); });
     inp.addEventListener('blur', () => inp.setAttribute('readonly', ''));
-    const pencil = h('button', { class: 'edit-btn', type: 'button', text: '✏️', onclick: () => {
+    const pen = h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'كتابة يدوية', onclick: () => {
       inp.removeAttribute('readonly'); inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length);
-    } });
-    box.append(h('label', { text: 'الدرس ' + i }), h('div', { class: 'lesson-input-wrap' }, inp, pencil));
-  }
+    } }, ic('edit'));
+    return h('div', { class: 'period' }, h('span', { class: 'num', text: i }), inp, pen);
+  }));
 }
-function openModal(i) {
+function openSheet(i) {
   editing = i;
-  $('modal-grid').replaceChildren(...SUBJECTS.map(s =>
-    h('button', { class: 'btn btn-outline', style: 'padding:10px;font-size:13px', type: 'button', text: s,
-      onclick: () => { $('ul-' + editing).value = s; closeModal(); } })));
-  $('modal').style.display = 'flex';
+  const now = $('ul-' + i).value;
+  $('opts').replaceChildren(...[...SUBJECTS, 'لا يوجد'].map(s =>
+    h('button', { class: 'opt' + (s === now ? ' sel' : ''), type: 'button', text: s,
+      onclick: () => { $('ul-' + editing).value = s; closeSheet(); } })));
+  $('drawer-bg').classList.add('on');
 }
-function closeModal() { $('modal').style.display = 'none'; }
+function closeSheet() { $('drawer-bg').classList.remove('on'); }
 
+// ---------- الواجبات والامتحانات ----------
+function checkEmpty(t) { $(t + '-empty').style.display = $(t + '-list').children.length ? 'none' : 'flex'; }
 function addBox(type) {
-  const box = h('div', { class: 'box' },
-    h('label', { text: 'المادة' }),
-    h('select', { class: type + '-title' }, SUBJECTS.map(s => opt(s))),
-    h('label', { text: 'النوع (تحضير، امتحان..)' }),
-    h('input', { type: 'text', class: type + '-type', placeholder: 'مثلاً: تحضير' }),
-    h('label', { text: 'التفاصيل' }),
-    h('textarea', { class: type + '-desc', placeholder: 'التفاصيل هنا...' }),
-    h('button', { class: 'btn btn-danger', type: 'button', text: 'حذف المادة ×', onclick: () => box.remove() }));
+  const box = h('div', { class: 'entry' },
+    h('div', { class: 'entry-head' },
+      h('select', { class: type + '-title', 'aria-label': 'المادة' }, SUBJECTS.map(s => opt(s))),
+      h('button', { class: 'icon-btn danger', type: 'button', 'aria-label': 'حذف', onclick: () => { box.remove(); checkEmpty(type); } }, ic('delete'))),
+    h('input', { type: 'text', class: type + '-type', 'aria-label': 'النوع', placeholder: type === 'hw' ? 'النوع، مثل: تحضير' : 'النوع، مثل: اختبار قصير' }),
+    h('textarea', { class: type + '-desc', 'aria-label': 'التفاصيل', placeholder: 'التفاصيل' }));
   $(type + '-list').append(box);
+  checkEmpty(type);
 }
 function collect(type) {
-  let out = '';
-  document.querySelectorAll('#' + type + '-list .box').forEach(b => {
-    const t = b.querySelector('.' + type + '-title').value;
+  const rows = [...document.querySelectorAll('#' + type + '-list .entry')];
+  const multi = rows.length > 1;
+  const items = rows.map((b, i) => {
+    const tag = b.querySelector('.' + type + '-title').value.trim().replace(/\s+/g, '_');
     const ty = b.querySelector('.' + type + '-type').value.trim();
-    const d = b.querySelector('.' + type + '-desc').value;
-    if (t) out += `• #${t} ${ty ? '(' + ty + ')' : ''} : \n${d}\n\n`;
+    const d = b.querySelector('.' + type + '-desc').value.trim();
+    const head = type === 'hw'
+      ? `${multi ? (i + 1) + '. ' : '• '}#${tag}${ty ? ' || ' + ty : ''} :`
+      : `★ ${multi ? (ORD[i] || (i + 1)) + ' ★ ' : ''}#${tag}${ty ? ' ★ ' + ty : ''} :`;
+    return d ? head + '\n' + d : head;
   });
-  return out;
+  if (!items.length) return NONE;
+  return items.join(type === 'hw' ? `\n\n${SEP}\n` : `\n${SEP}\n`);
 }
+
+// ---------- توليد المنشور ونسخه ----------
 function generate() {
-  const en = s => String(s).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
   const day = $('u-day').value;
-  const dg = `${en($('g-d').value)} / ${$('g-m').value} / ${en($('g-y').value)}`;
-  const dh = `${en($('h-d').value)} / ${$('h-m').value} / ${en($('h-y').value)}`;
-  const names = ['الأول','الثاني','الثالث','الرابع','الخامس','السادس'];
-  let sched = '';
-  for (let i = 1; i <= 6; i++) sched += `✳️ الدرس ${names[i - 1]} ✳️  : ${$('ul-' + i).value}\n`;
-  const hw = collect('hw'), ex = collect('ex');
-  const final = `#واجبات_باچر \n${LINE}\nيوم : ${day} \nبـ تاريخ : ${dg} ( م )\nالموافق : ${dh} ( هـ )\n${LINE}\n\n#جدول_الدروس\n\n🔵 يوم ${day} 🔵\n\n${sched}\n${LINE}\n\n#الواجبات\n\n${hw || 'لايوجد..'}\n${LINE}\n\n#الإمتحانات\n\n${ex || 'لايوجد..'}\n\n${LINE}\n#واجبات_باچر #قسم_الإعلام\nبـ واسطة : ${$('u-pub').value} \nللتواصل : ${$('u-contact').value}\n${LINE}`;
-  $('result-box').textContent = final;
+  const mNum = MONTHS.indexOf($('g-m').value) + 1;
+  const date = `${$('g-d').value} / ${$('g-m').value} ( ${mNum} ) / ${$('g-y').value} م`;
+  const lessons = [1, 2, 3, 4, 5, 6].map(i => `${i}. ${$('ul-' + i).value}`).join('\n');
+  const contact = $('u-contact').value.trim();
+  const text = [
+    '#واجبات_باجر', DIV,
+    `يوم : ${day}`, `بـ تاريخ : ${date}`, DIV,
+    '#جدول الدروس', lessons, DIV,
+    '#الواجبات', collect('hw'), DIV,
+    '#الإمتحانات', collect('ex'), DIV,
+    '#واجبات_باچر || #قسم_الإعلام',
+    `بـ واسطة : ${$('u-pub').value.trim()} || ${$('u-role').value}`,
+    ...(contact ? [`للتواصل : ${contact}`] : [])
+  ].join('\n');
+  // علامة RTL غير مرئية في بداية كل سطر لإجبار الاتجاه من اليمين لليسار في تيليجرام
+  $('result').textContent = text.split('\n').map(l => RLM + l).join('\n');
   go(6);
 }
 async function copyResult() {
-  const t = $('result-box').textContent;
-  try { await navigator.clipboard.writeText(t); alert('تم النسخ بنجاح ✅'); }
+  const t = $('result').textContent;
+  let ok = false;
+  try { await navigator.clipboard.writeText(t); ok = true; }
   catch {
     const ta = h('textarea'); ta.value = t; document.body.append(ta); ta.select();
-    try { document.execCommand('copy'); alert('تم النسخ بنجاح ✅'); } catch { alert('فشل النسخ'); }
+    try { ok = document.execCommand('copy'); } catch {}
     ta.remove();
   }
+  toast(ok ? 'تم نسخ المنشور' : 'تعذّر النسخ، انسخ النص يدوياً');
 }
 
-applyTheme();
-buildDates();
+// ---------- التشغيل ----------
+(function boot() {
+  let saved = null; try { saved = localStorage.getItem('theme'); } catch {}
+  applyTheme(saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches);
+  if (document.fonts) document.fonts.load('22px "Material Icons Round"', 'menu_book')
+    .then(f => { if (f.length) document.documentElement.classList.add('icons'); }).catch(() => {});
+
+  const y = new Date().getFullYear();
+  $('g-m').replaceChildren(...MONTHS.map(m => opt(m)));
+  $('g-y').replaceChildren(...[y - 1, y, y + 1, y + 2].map(v => opt(v)));
+  $('u-day').replaceChildren(...DAYS.map(d => opt(d)));
+  $('u-role').replaceChildren(...ROLES.map(r => opt(r)));
+  setDate(1);
+
+  const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
+  $('home-next').textContent = fmt(tomorrow);
+  checkEmpty('hw'); checkEmpty('ex');
+})();
 </script>
 </body>
 </html>
