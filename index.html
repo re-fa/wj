@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>واجبات باچر 📚</title>
+<style>
+:root{--bg:#f8fafc;--surface:#fff;--text:#0f172a;--primary:#2563eb;--border:#e2e8f0;--danger:#ef4444;--success:#10b981}
+.dark-mode{--bg:#020617;--surface:#0f172a;--text:#f8fafc;--primary:#3b82f6;--border:#1e293b}
+*{box-sizing:border-box;outline:none;font-family:'Tajawal',system-ui,'Segoe UI',Tahoma,sans-serif;transition:background .3s,color .3s}
+body{margin:0;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+.app-view{display:none;flex-direction:column;min-height:100vh}
+.app-view.active{display:flex}
+.splash{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
+.splash-logo{width:130px;height:130px;border-radius:30px;background:var(--surface);border:1px solid var(--border);box-shadow:0 10px 25px rgba(0,0,0,.1);margin-bottom:20px;display:flex;align-items:center;justify-content:center;font-size:64px}
+.header{padding:15px 20px;background:var(--surface);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+.container{max-width:550px;margin:0 auto;padding:20px;width:100%}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:25px;margin-bottom:20px;box-shadow:0 4px 6px -1px rgba(0,0,0,.05)}
+h2{margin-top:0;color:var(--primary);font-size:20px;border-bottom:2px dashed var(--border);padding-bottom:15px}
+label{display:block;font-weight:700;margin-bottom:8px;font-size:14px;opacity:.8}
+input,select,textarea{width:100%;padding:14px;border-radius:12px;border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-size:15px;font-weight:500;margin-bottom:15px}
+.date-row{display:flex;gap:8px;margin-bottom:15px;width:100%}
+.date-row select{margin-bottom:0;padding:12px 4px;text-align:center}
+.d-day{flex:1}.d-month{flex:2.5}.d-year{flex:1.5}
+.lesson-input-wrap{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+.lesson-input-wrap input{margin-bottom:0;flex:1}
+input[readonly]{cursor:pointer}
+.edit-btn{background:var(--primary);color:#fff;border:none;padding:12px;border-radius:12px;cursor:pointer;font-size:16px}
+.btn{width:100%;padding:16px;border-radius:14px;border:none;font-weight:800;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-success{background:var(--success);color:#fff;margin-bottom:20px}
+.btn-outline{background:transparent;border:2px solid var(--primary);color:var(--primary)}
+.btn-danger{background:rgba(239,68,68,.1);border:1px solid var(--danger);color:var(--danger);padding:10px;font-size:14px;margin-top:5px}
+.btn.sm{width:auto;padding:6px 12px;font-size:12px;border-radius:8px}
+.step{display:none;animation:slideIn .3s ease}
+.step.active{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateX(-15px)}to{opacity:1;transform:translateX(0)}}
+@media (prefers-reduced-motion:reduce){.step{animation:none}}
+.box{background:var(--bg);padding:15px;border-radius:12px;border:1px solid var(--border);margin-bottom:15px}
+#result-box{background:#0f172a;color:#f8fafc;padding:20px;border-radius:15px;white-space:pre-wrap;line-height:1.5;font-size:14px;text-align:right}
+#modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;align-items:center;justify-content:center;padding:20px}
+#modal .card{width:100%;max-width:400px;max-height:80vh;overflow-y:auto;margin:0}
+#modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.footer{padding:20px;text-align:center;border-top:1px solid var(--border);font-weight:700;opacity:.8;margin-top:auto}
+</style>
+</head>
+<body>
+
+<div id="view-splash" class="app-view active">
+  <div class="header">
+    <b>📚 النظام الرئيسي</b>
+    <button class="btn btn-outline sm" onclick="toggleTheme()"><span id="theme-icon">🌙</span></button>
+  </div>
+  <div class="splash">
+    <div class="splash-logo">📚</div>
+    <h1 style="margin:0 0 5px;font-weight:900">واجبات باچر 📚</h1>
+    <p style="margin-bottom:30px;font-weight:700;opacity:.6">برمجة وتطوير : رضا محمد</p>
+    <div style="width:85%;max-width:320px">
+      <button class="btn btn-primary" onclick="startUser()">✍️ إنشاء منشور جديد</button>
+    </div>
+  </div>
+</div>
+
+<div id="view-user" class="app-view">
+  <div class="header">
+    <b>✍️ إنشاء منشور</b>
+    <button class="btn btn-outline sm" onclick="setView('view-splash')">خروج</button>
+  </div>
+  <main class="container">
+    <div id="step-1" class="step active"><div class="card">
+      <h2>📅 الزمان والتاريخ</h2>
+      <label>يوم الأسبوع</label>
+      <select id="u-day" onchange="loadSchedule()"></select>
+      <label>التاريخ الميلادي</label>
+      <div class="date-row"><select id="g-d" class="d-day"></select><select id="g-m" class="d-month"></select><select id="g-y" class="d-year"></select></div>
+      <label>التاريخ الهجري</label>
+      <div class="date-row"><select id="h-d" class="d-day"></select><select id="h-m" class="d-month"></select><select id="h-y" class="d-year"></select></div>
+      <button class="btn btn-primary" onclick="go(2)">جدول الدروس ←</button>
+    </div></div>
+
+    <div id="step-2" class="step"><div class="card">
+      <h2>📖 جدول الدروس</h2>
+      <div id="u-lessons"></div>
+      <button class="btn btn-primary" onclick="go(3)">الواجبات ←</button>
+    </div></div>
+
+    <div id="step-3" class="step"><div class="card">
+      <h2>✏️ الواجبات اليومية</h2>
+      <div id="hw-list"></div>
+      <button class="btn btn-outline" style="margin-bottom:20px;padding:12px" onclick="addBox('hw')">+ إضافة واجب جديد</button>
+      <button class="btn btn-primary" onclick="go(4)">الامتحانات ←</button>
+    </div></div>
+
+    <div id="step-4" class="step"><div class="card">
+      <h2>⚠️ الامتحانات</h2>
+      <div id="ex-list"></div>
+      <button class="btn btn-outline" style="margin-bottom:20px;padding:12px" onclick="addBox('ex')">+ إضافة امتحان جديد</button>
+      <button class="btn btn-primary" onclick="go(5)">الناشر ←</button>
+    </div></div>
+
+    <div id="step-5" class="step"><div class="card">
+      <h2>👤 بيانات الناشر</h2>
+      <label>بواسطة</label>
+      <input type="text" id="u-pub" value="رضا محمد">
+      <label>المنصب</label>
+      <select id="u-role"></select>
+      <label>التواصل (Telegram)</label>
+      <input type="text" id="u-contact" placeholder="@username" dir="ltr">
+      <button class="btn btn-primary" onclick="generate()">توليد الكليشة النهائية ✔</button>
+    </div></div>
+
+    <div id="step-6" class="step">
+      <button class="btn btn-success" onclick="copyResult()">📋 نسخ النص بالكامل</button>
+      <div id="result-box"></div>
+      <button class="btn btn-outline" style="margin-top:20px" onclick="location.reload()">منشور جديد</button>
+    </div>
+  </main>
+  <div class="footer">رضا محمد © واجبات باچر</div>
+</div>
+
+<div id="modal">
+  <div class="card">
+    <h3>اختر المادة</h3>
+    <div id="modal-grid"></div>
+    <button class="btn btn-outline" style="margin-top:20px" onclick="closeModal()">إلغاء</button>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+/* ====== البيانات: عدّلها هنا مباشرة ====== */
+const SUBJECTS = ['التربية الإسلامية','اللغة العربية','اللغة الإنجليزية','الرياضيات','الأحياء','الكيمياء','الفيزياء','التربية الفنية','الرياضة'];
+const ROLES = ['مدير القناة','المشرف الأول','المشرف الثاني','المشرف'];
+const SCHEDULE = {
+  'الأحد':    ['التربية الإسلامية','اللغة العربية','الرياضيات','الفيزياء','اللغة الإنجليزية','الرياضة'],
+  'الاثنين':  ['اللغة العربية','الرياضيات','الكيمياء','الأحياء','اللغة الإنجليزية','التربية الفنية'],
+  'الثلاثاء': ['الرياضيات','اللغة الإنجليزية','التربية الإسلامية','اللغة العربية','الفيزياء','الكيمياء'],
+  'الأربعاء': ['الأحياء','الفيزياء','اللغة العربية','الرياضيات','التربية الإسلامية','اللغة الإنجليزية'],
+  'الخميس':   ['اللغة الإنجليزية','الكيمياء','الرياضيات','الرياضة','اللغة العربية','الأحياء'],
+  'الجمعة':   ['لا يوجد','لا يوجد','لا يوجد','لا يوجد','لا يوجد','لا يوجد'],
+  'السبت':    ['لا يوجد','لا يوجد','لا يوجد','لا يوجد','لا يوجد','لا يوجد']
+};
+/* ======================================= */
+
+const DAYS = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+const G_MONTHS = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const H_MONTHS = ['محرم','صفر','ربيع الأول','ربيع الآخر','جمادى الأولى','جمادى الآخرة','رجب','شعبان','رمضان','شوال','ذو القعدة','ذو الحجة'];
+const LINE = '•'.repeat(40);
+const $ = id => document.getElementById(id);
+let editing = null;
+
+// إنشاء عناصر DOM بأمان (بدون innerHTML)
+function h(tag, attrs = {}, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === 'text') e.textContent = v;
+    else if (k.startsWith('on')) e.addEventListener(k.slice(2), v);
+    else e.setAttribute(k, v);
+  }
+  kids.flat().forEach(c => e.append(c));
+  return e;
+}
+const opt = (v, t = v) => h('option', { value: v, text: t });
+
+function setView(id) {
+  document.querySelectorAll('.app-view').forEach(v => v.classList.remove('active'));
+  $(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+function go(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  $('step-' + n).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ---------- الثيم ----------
+function applyTheme() {
+  let dark = false;
+  try { dark = localStorage.getItem('theme') === 'dark'; } catch {}
+  document.body.classList.toggle('dark-mode', dark);
+  $('theme-icon').textContent = dark ? '☀️' : '🌙';
+}
+function toggleTheme() {
+  const dark = !document.body.classList.contains('dark-mode');
+  try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch {}
+  applyTheme();
+}
+
+// ---------- التواريخ ----------
+function todayHijri(now) {
+  try {
+    const p = new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn', { day: 'numeric', month: 'numeric', year: 'numeric' }).formatToParts(now);
+    const g = t => parseInt(p.find(x => x.type === t).value, 10);
+    const r = { d: g('day'), m: g('month'), y: g('year') };
+    if (r.d && r.m && r.y) return r;
+  } catch {}
+  return { d: 1, m: 1, y: 1448 };
+}
+function buildDates() {
+  const now = new Date(), hj = todayHijri(now), gy = now.getFullYear();
+  const nums = n => Array.from({ length: n }, (_, i) => i + 1);
+  const years = y => [y - 1, y, y + 1, y + 2];
+  $('g-d').replaceChildren(...nums(31).map(x => opt(x)));
+  $('h-d').replaceChildren(...nums(30).map(x => opt(x)));
+  $('g-m').replaceChildren(...G_MONTHS.map((m, i) => opt(m, `${m} ( ${i + 1} )`)));
+  $('h-m').replaceChildren(...H_MONTHS.map((m, i) => opt(m, `${m} ( ${i + 1} )`)));
+  $('g-y').replaceChildren(...years(gy).map(x => opt(x)));
+  $('h-y').replaceChildren(...years(hj.y).map(x => opt(x)));
+  $('u-day').replaceChildren(...DAYS.map(d => opt(d)));
+  $('u-day').value = DAYS[now.getDay()];
+  $('g-d').value = now.getDate(); $('g-m').value = G_MONTHS[now.getMonth()]; $('g-y').value = gy;
+  $('h-d').value = Math.min(hj.d, 30); $('h-m').value = H_MONTHS[hj.m - 1]; $('h-y').value = hj.y;
+}
+
+// ---------- الواجهة ----------
+function startUser() {
+  $('u-role').replaceChildren(...ROLES.map(r => opt(r)));
+  setView('view-user'); go(1);
+  loadSchedule();
+}
+function loadSchedule() {
+  const lessons = SCHEDULE[$('u-day').value] || [];
+  const box = $('u-lessons'); box.replaceChildren();
+  for (let i = 1; i <= 6; i++) {
+    const inp = h('input', { type: 'text', id: 'ul-' + i, readonly: '' });
+    inp.value = lessons[i - 1] || 'لا يوجد';
+    inp.addEventListener('click', () => { if (inp.hasAttribute('readonly')) openModal(i); });
+    inp.addEventListener('blur', () => inp.setAttribute('readonly', ''));
+    const pencil = h('button', { class: 'edit-btn', type: 'button', text: '✏️', onclick: () => {
+      inp.removeAttribute('readonly'); inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length);
+    } });
+    box.append(h('label', { text: 'الدرس ' + i }), h('div', { class: 'lesson-input-wrap' }, inp, pencil));
+  }
+}
+function openModal(i) {
+  editing = i;
+  $('modal-grid').replaceChildren(...SUBJECTS.map(s =>
+    h('button', { class: 'btn btn-outline', style: 'padding:10px;font-size:13px', type: 'button', text: s,
+      onclick: () => { $('ul-' + editing).value = s; closeModal(); } })));
+  $('modal').style.display = 'flex';
+}
+function closeModal() { $('modal').style.display = 'none'; }
+
+function addBox(type) {
+  const box = h('div', { class: 'box' },
+    h('label', { text: 'المادة' }),
+    h('select', { class: type + '-title' }, SUBJECTS.map(s => opt(s))),
+    h('label', { text: 'النوع (تحضير، امتحان..)' }),
+    h('input', { type: 'text', class: type + '-type', placeholder: 'مثلاً: تحضير' }),
+    h('label', { text: 'التفاصيل' }),
+    h('textarea', { class: type + '-desc', placeholder: 'التفاصيل هنا...' }),
+    h('button', { class: 'btn btn-danger', type: 'button', text: 'حذف المادة ×', onclick: () => box.remove() }));
+  $(type + '-list').append(box);
+}
+function collect(type) {
+  let out = '';
+  document.querySelectorAll('#' + type + '-list .box').forEach(b => {
+    const t = b.querySelector('.' + type + '-title').value;
+    const ty = b.querySelector('.' + type + '-type').value.trim();
+    const d = b.querySelector('.' + type + '-desc').value;
+    if (t) out += `• #${t} ${ty ? '(' + ty + ')' : ''} : \n${d}\n\n`;
+  });
+  return out;
+}
+function generate() {
+  const en = s => String(s).replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d));
+  const day = $('u-day').value;
+  const dg = `${en($('g-d').value)} / ${$('g-m').value} / ${en($('g-y').value)}`;
+  const dh = `${en($('h-d').value)} / ${$('h-m').value} / ${en($('h-y').value)}`;
+  const names = ['الأول','الثاني','الثالث','الرابع','الخامس','السادس'];
+  let sched = '';
+  for (let i = 1; i <= 6; i++) sched += `✳️ الدرس ${names[i - 1]} ✳️  : ${$('ul-' + i).value}\n`;
+  const hw = collect('hw'), ex = collect('ex');
+  const final = `#واجبات_باچر \n${LINE}\nيوم : ${day} \nبـ تاريخ : ${dg} ( م )\nالموافق : ${dh} ( هـ )\n${LINE}\n\n#جدول_الدروس\n\n🔵 يوم ${day} 🔵\n\n${sched}\n${LINE}\n\n#الواجبات\n\n${hw || 'لايوجد..'}\n${LINE}\n\n#الإمتحانات\n\n${ex || 'لايوجد..'}\n\n${LINE}\n#واجبات_باچر #قسم_الإعلام\nبـ واسطة : ${$('u-pub').value} \nللتواصل : ${$('u-contact').value}\n${LINE}`;
+  $('result-box').textContent = final;
+  go(6);
+}
+async function copyResult() {
+  const t = $('result-box').textContent;
+  try { await navigator.clipboard.writeText(t); alert('تم النسخ بنجاح ✅'); }
+  catch {
+    const ta = h('textarea'); ta.value = t; document.body.append(ta); ta.select();
+    try { document.execCommand('copy'); alert('تم النسخ بنجاح ✅'); } catch { alert('فشل النسخ'); }
+    ta.remove();
+  }
+}
+
+applyTheme();
+buildDates();
+</script>
+</body>
+</html>
