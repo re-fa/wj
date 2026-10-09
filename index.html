@@ -80,13 +80,33 @@ body:not([data-v=wiz]) .bar{display:none}
 .toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translate(-50%,10px);z-index:60;display:flex;align-items:center;gap:8px;background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:15px;opacity:0;pointer-events:none;transition:.25s}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.panel{position:relative}
+.datebar{display:flex;gap:8px;align-items:stretch}
+.dnav{flex:0 0 76px;height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:14px;border:1.5px solid var(--line);background:var(--field);color:var(--ink);cursor:pointer;font:600 12px 'IBM Plex Sans Arabic',sans-serif}
+.dcur{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:14px;border:1.5px solid var(--line);background:var(--sheet);color:var(--ink);cursor:pointer;font:500 15px 'IBM Plex Sans Arabic',sans-serif}
+.dcur b{font:800 26px/1.3 Cairo,sans-serif}
+.dcal{display:flex;align-items:center;gap:4px;color:var(--muted);font-size:13px;margin-top:2px}
+.dcal .material-icons-round{font-size:16px}
+.sr-date{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.lock{width:44px;height:44px;border:0;border-radius:12px;background:transparent;color:var(--muted);opacity:.35;cursor:pointer;display:inline-grid;place-items:center}
+.lock:hover,.lock:focus-visible{opacity:.9}
+.admin-only{display:none!important}
+body.admin .admin-only{display:inline-flex!important;align-items:center;justify-content:center}
+.mrow{display:flex;align-items:center;gap:8px;padding:10px 12px;margin-bottom:8px;border:1.5px solid var(--line);border-radius:14px;background:var(--field)}
+.mtext{flex:1;min-width:0;display:flex;flex-direction:column}
+.mtext small{color:var(--muted)}
+.mrow .icon-btn{width:40px;height:40px}
 </style>
 </head>
 <body data-v="home">
 
 <header class="top">
   <div class="brand"><span class="logo"><span class="material-icons-round">menu_book</span></span>واجبات باچر</div>
-  <button class="icon-btn" id="theme-btn" aria-label="تبديل المظهر" onclick="toggleTheme()"></button>
+  <div style="display:flex;gap:8px;align-items:center">
+    <button class="icon-btn admin-only" id="exit-admin" aria-label="الخروج من وضع المدير" onclick="exitAdmin()" style="width:auto;padding:0 12px;gap:6px;font:600 14px 'IBM Plex Sans Arabic',sans-serif"><span class="material-icons-round">admin_panel_settings</span>وضع المدير</button>
+    <button class="icon-btn" id="theme-btn" aria-label="تبديل المظهر" onclick="toggleTheme()"></button>
+  </div>
 </header>
 
 <section id="view-home" class="view on wrap">
@@ -98,7 +118,9 @@ body:not([data-v=wiz]) .bar{display:none}
       <div><small>تاريخ المنشور القادم</small><span class="hl" id="home-next"></span></div>
     </div>
     <button class="btn pri big" onclick="start()">ابدأ المنشور<span class="material-icons-round">arrow_back</span></button>
+    <button class="btn ghost big admin-only" type="button" onclick="openMgr()" style="margin-top:12px"><span class="material-icons-round">settings</span>إدارة البيانات</button>
     <p class="credit">برمجة وتطوير : رضا محمد</p>
+    <div style="text-align:center;margin-top:6px"><button class="lock" id="lock-btn" type="button" aria-label="دخول المدير" onclick="openAdmin()"><span class="material-icons-round">lock</span></button></div>
   </div>
 </section>
 
@@ -107,23 +129,25 @@ body:not([data-v=wiz]) .bar{display:none}
   <div class="ptitle"><small id="p-count"></small><h2 id="p-title"></h2></div>
 
   <div class="step panel" id="step-1">
-    <div class="quick">
+    <div class="datebar">
+      <button class="dnav" type="button" onclick="shiftDay(-1)" aria-label="اليوم السابق"><span class="material-icons-round">chevron_right</span>اليوم السابق</button>
+      <button class="dcur" type="button" onclick="pickDate()" aria-label="اختيار تاريخ من التقويم">
+        <b id="d-day"></b><span id="d-full"></span>
+        <span class="dcal"><span class="material-icons-round">calendar_month</span>اختيار من التقويم</span>
+      </button>
+      <button class="dnav" type="button" onclick="shiftDay(1)" aria-label="اليوم التالي"><span class="material-icons-round">chevron_left</span>اليوم التالي</button>
+    </div>
+    <input type="date" id="g-date" class="sr-date" onchange="datePicked()" tabindex="-1" aria-hidden="true">
+    <div class="quick" style="margin:16px 0 0;justify-content:center">
       <button class="chip" data-off="0" onclick="setDate(0)">اليوم</button>
       <button class="chip" data-off="1" onclick="setDate(1)">غداً</button>
     </div>
-    <div class="field"><label for="u-day">يوم الأسبوع</label><select id="u-day" onchange="loadSchedule()"></select></div>
-    <label>التاريخ</label>
-    <div class="date-row">
-      <select id="g-d" aria-label="اليوم" onchange="dateChanged()"></select>
-      <select id="g-m" aria-label="الشهر" onchange="dateChanged()"></select>
-      <select id="g-y" aria-label="السنة" onchange="dateChanged()"></select>
-    </div>
-    <p class="hint"><span class="material-icons-round">info</span><span id="date-hint"></span></p>
   </div>
 
   <div class="step panel" id="step-2">
     <p class="hint" style="margin:0"><span class="material-icons-round">touch_app</span>انقر على المادة لاختيارها من القائمة، أو على القلم للكتابة بنفسك.</p>
     <div class="periods" id="u-lessons"></div>
+    <button class="btn ghost big admin-only" id="save-sched" type="button" onclick="saveSchedule()" disabled style="margin-top:16px"><span class="material-icons-round">save</span><span id="save-label">حفظ في قاعدة البيانات</span></button>
   </div>
 
   <div class="step panel" id="step-3">
@@ -159,16 +183,42 @@ body:not([data-v=wiz]) .bar{display:none}
     <div class="opts" id="opts"></div>
   </div>
 </div>
+<div class="drawer-bg" id="admin-bg" onclick="closeAdmin()">
+  <div class="drawer" onclick="event.stopPropagation()">
+    <div class="grab"></div>
+    <h3>دخول المدير</h3>
+    <div class="field"><label for="admin-pw">كلمة المرور</label><input type="password" id="admin-pw" autocomplete="off" onkeydown="if(event.key==='Enter')adminLogin()"></div>
+    <p class="hint" id="admin-msg" style="margin:0 0 14px;min-height:22px;color:var(--danger)"></p>
+    <button class="btn pri big" id="admin-go" type="button" onclick="adminLogin()"><span class="material-icons-round">lock_open</span>دخول</button>
+  </div>
+</div>
+<div class="drawer-bg" id="mgr-bg">
+  <div class="drawer" style="max-height:88vh;min-height:60vh">
+    <div class="grab"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <h3 style="margin:0">إدارة البيانات</h3>
+      <button class="icon-btn" type="button" aria-label="إغلاق" onclick="closeMgr()"><span class="material-icons-round">close</span></button>
+    </div>
+    <div class="quick" style="margin:0 0 14px">
+      <button class="chip mgr-tab on" data-t="pubs" type="button" onclick="mgrSwitch('pubs')">الناشرون</button>
+      <button class="chip mgr-tab" data-t="roles" type="button" onclick="mgrSwitch('roles')">المناصب</button>
+      <button class="chip mgr-tab" data-t="subs" type="button" onclick="mgrSwitch('subs')">المواد</button>
+    </div>
+    <div id="mgr-body"></div>
+    <p class="hint" id="mgr-hint" style="margin:0 0 14px"></p>
+    <button class="btn pri big" id="mgr-add" type="button" onclick="mgrForm(null)"><span class="material-icons-round">add</span><span id="mgr-add-label">إضافة</span></button>
+  </div>
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
 'use strict';
 
-/* ====== البيانات: عدّلها هنا مباشرة ====== */
-const SUBJECTS = ['التربية الإسلامية','اللغة العربية','اللغة الإنجليزية','الرياضيات','الأحياء','الكيمياء','الفيزياء','التربية الفنية','الرياضة'];
-const ROLES = ['مدير القناة','المشرف الأول','المشرف الثاني','المشرف'];
+/* ====== بيانات احتياطية (تُستبدل ببيانات Supabase عند نجاح الاتصال) ====== */
+let SUBJECTS = ['التربية الإسلامية','اللغة العربية','اللغة الإنجليزية','الرياضيات','الأحياء','الكيمياء','الفيزياء','التربية الفنية','الرياضة'];
+let ROLES = ['مدير القناة','المشرف الأول','المشرف الثاني','المشرف'];
 // الناشرون: الاسم + اليوزر (خانة التواصل) + المنصب اختيارياً. بدون role يُستخدم أول منصب في ROLES.
-const PUBLISHERS = [
+let PUBLISHERS = [
   { name: 'رضا محمد',      user: '@r_g7f' },
   { name: 'عبدالله صعيو', user: '@spki4', role: 'المشرف الأول' },
 ];
@@ -182,6 +232,10 @@ const SCHEDULE = {
   'السبت':    ['لا يوجد','لا يوجد','لا يوجد','لا يوجد','لا يوجد','لا يوجد']
 };
 /* ======================================= */
+
+// إعدادات Supabase (المفتاح العام آمن في الصفحة، والحماية بسياسات RLS داخل القاعدة)
+const SB_URL = 'https://wdaajhruagxdbpslmnml.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndkYWFqaHJ1YWd4ZGJwc2xtbm1sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE1MzU3OTMsImV4cCI6MjEwNzExMTc5M30.8bltsKy5W8gd0fAoVE1Ftdo1wTW-rBjHLcTlPwh7qtU';
 
 const DAYS = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
 const MONTHS = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
@@ -238,59 +292,142 @@ function render() {
   else if (cur === 5) { next.replaceChildren(ic('auto_awesome'), 'توليد المنشور'); next.onclick = generate; }
   else { next.replaceChildren(ic('content_copy'), 'نسخ المنشور'); next.onclick = copyResult; }
 }
-function toast(msg) {
+function toast(msg, icon = 'check_circle') {
   const t = $('toast');
-  t.replaceChildren(ic('check_circle'), msg);
+  t.replaceChildren(ic(icon), msg);
   t.classList.add('on');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => t.classList.remove('on'), 2200);
 }
 
 // ---------- التاريخ ----------
-function fillDays() {
-  const y = +$('g-y').value, m = MONTHS.indexOf($('g-m').value);
-  const n = new Date(y, m + 1, 0).getDate(), keep = Math.min(+$('g-d').value || 1, n);
-  $('g-d').replaceChildren(...Array.from({ length: n }, (_, i) => opt(i + 1)));
-  $('g-d').value = keep;
+let curDate = new Date();
+const sameDay = (a, b) => a.toDateString() === b.toDateString();
+function setDateObj(d) {
+  curDate = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  $('d-day').textContent = DAYS[curDate.getDay()];
+  $('d-full').textContent = `${curDate.getDate()} ${MONTHS[curDate.getMonth()]} ${curDate.getFullYear()}`;
+  $('g-date').value = `${curDate.getFullYear()}-${String(curDate.getMonth() + 1).padStart(2, '0')}-${String(curDate.getDate()).padStart(2, '0')}`;
+  document.querySelectorAll('.chip').forEach(c => {
+    const t = new Date(); t.setDate(t.getDate() + +c.dataset.off);
+    c.classList.toggle('on', sameDay(t, curDate));
+  });
+  loadSchedule();
 }
-function markChip(off) {
-  document.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', +c.dataset.off === off));
-  $('date-hint').textContent = off === 1 ? 'ضُبط التاريخ تلقائياً على الغد.' : off === 0 ? 'ضُبط التاريخ على اليوم.' : 'تاريخ مخصص، ويتبعه يوم الأسبوع تلقائياً.';
-}
-function setDate(off) {
-  const d = new Date(); d.setDate(d.getDate() + off);
-  $('g-y').value = d.getFullYear(); $('g-m').value = MONTHS[d.getMonth()];
-  fillDays(); $('g-d').value = d.getDate();
-  $('u-day').value = DAYS[d.getDay()];
-  markChip(off); loadSchedule();
-}
-function dateChanged() {
-  fillDays();
-  const d = new Date(+$('g-y').value, MONTHS.indexOf($('g-m').value), +$('g-d').value);
-  $('u-day').value = DAYS[d.getDay()];
-  markChip(null); loadSchedule();
+function shiftDay(n) { const d = new Date(curDate); d.setDate(d.getDate() + n); setDateObj(d); }
+function setDate(off) { const d = new Date(); d.setDate(d.getDate() + off); setDateObj(d); }
+function pickDate() { const i = $('g-date'); try { i.showPicker(); } catch { i.click(); } }
+function datePicked() {
+  const v = $('g-date').value;
+  if (v) { const [y, m, d] = v.split('-').map(Number); setDateObj(new Date(y, m - 1, d)); }
 }
 
+// ---------- قاعدة البيانات (Supabase) ----------
+let dbSchedule = {}, adminPw = '';
+async function sb(path, body) {
+  const r = await fetch(`${SB_URL}/rest/v1/${path}`, {
+    method: body ? 'POST' : 'GET',
+    headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY, 'Content-Type': 'application/json' },
+    body: body ? JSON.stringify(body) : undefined
+  });
+  if (!r.ok) throw new Error('db ' + r.status);
+  return r.json();
+}
+function applyData(d) {
+  if (d.subjects && d.subjects.length) SUBJECTS = d.subjects.map(x => x.name);
+  if (d.roles && d.roles.length) ROLES = d.roles.map(x => x.name);
+  if (d.supervisors && d.supervisors.length)
+    PUBLISHERS = d.supervisors.map(x => ({ name: x.name, user: x.username, role: x.role ? x.role.name : '' }));
+  dbSchedule = {};
+  (d.schedule || []).forEach(r => { dbSchedule[r.day_index] = [r.l1, r.l2, r.l3, r.l4, r.l5, r.l6]; });
+}
+async function loadData() {
+  try {
+    const [schedule, subjects, roles, supervisors] = await Promise.all([
+      sb('schedule?select=*&order=day_index'), sb('subjects?select=name&order=id'),
+      sb('roles?select=name&order=id'), sb('supervisors?select=name,username,role:roles(name)&order=id')]);
+    const d = { schedule, subjects, roles, supervisors };
+    try { localStorage.setItem('wj_cache', JSON.stringify(d)); } catch {}
+    applyData(d);
+    return true;
+  } catch {
+    try { const c = localStorage.getItem('wj_cache'); if (c) applyData(JSON.parse(c)); } catch {}
+    return false;
+  }
+}
+
+// ---------- وضع المدير ----------
+function openAdmin() {
+  $('admin-pw').value = ''; $('admin-msg').textContent = '';
+  $('admin-bg').classList.add('on');
+  setTimeout(() => $('admin-pw').focus(), 50);
+}
+function closeAdmin() { $('admin-bg').classList.remove('on'); }
+async function adminLogin() {
+  const pw = $('admin-pw').value;
+  if (!pw) return;
+  const btn = $('admin-go'); btn.disabled = true; $('admin-msg').textContent = '';
+  try {
+    const r = await sb('rpc/check_admin', { pw });
+    if (r === 'ok') { adminPw = pw; setAdmin(true); closeAdmin(); toast('تم تفعيل وضع المدير'); }
+    else $('admin-msg').textContent = r === 'locked' ? 'محاولات كثيرة، حاول بعد 5 دقائق'
+      : r === 'none' ? 'لم تُضبط كلمة مرور المدير بعد' : 'كلمة المرور غير صحيحة';
+  } catch (e) { $('admin-msg').textContent = 'تعذّر الاتصال بقاعدة البيانات (' + e.message + ')'; }
+  btn.disabled = false;
+}
+function setAdmin(on) {
+  document.body.classList.toggle('admin', on);
+  if (!on) { adminPw = ''; closeMgr(); }
+  refreshSave();
+}
+function exitAdmin() { setAdmin(false); toast('تم الخروج من وضع المدير'); }
+
 // ---------- الدروس ----------
+const norm = v => (v || '').trim().slice(0, 100) || 'لا يوجد';
+function currentLessons() {
+  const i = curDate.getDay();
+  return dbSchedule[i] || SCHEDULE[DAYS[i]] || [];
+}
+function lessonValues() { return [1, 2, 3, 4, 5, 6].map(i => $('ul-' + i).value); }
+function refreshSave() {
+  const btn = $('save-sched');
+  if (!btn) return;
+  const base = currentLessons(), now = lessonValues();
+  btn.disabled = !now.some((v, i) => norm(v) !== norm(base[i]));
+  $('save-label').textContent = `حفظ جدول يوم ${DAYS[curDate.getDay()]}`;
+}
 function loadSchedule() {
-  const L = SCHEDULE[$('u-day').value] || [];
+  const L = currentLessons();
   $('u-lessons').replaceChildren(...[1, 2, 3, 4, 5, 6].map(i => {
     const inp = h('input', { type: 'text', id: 'ul-' + i, readonly: '', 'aria-label': 'الدرس ' + i });
     inp.value = L[i - 1] || 'لا يوجد';
     inp.addEventListener('click', () => { if (inp.hasAttribute('readonly')) openSheet('ul-' + i, [...SUBJECTS, 'لا يوجد'], 'اختر المادة'); });
     inp.addEventListener('blur', () => inp.setAttribute('readonly', ''));
+    inp.addEventListener('input', refreshSave);
     const pen = h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'كتابة يدوية', onclick: () => {
       inp.removeAttribute('readonly'); inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length);
     } }, ic('edit'));
     return h('div', { class: 'period' }, h('span', { class: 'num', text: i }), inp, pen);
   }));
+  refreshSave();
+}
+async function saveSchedule() {
+  const idx = curDate.getDay(), vals = lessonValues().map(norm), btn = $('save-sched');
+  btn.disabled = true;
+  try {
+    const r = await sb('rpc/save_schedule', { pw: adminPw, day_idx: idx, lessons: vals });
+    if (r === 'saved') { dbSchedule[idx] = vals; toast(`تم حفظ جدول يوم ${DAYS[idx]} في قاعدة البيانات`); loadSchedule(); }
+    else if (r === 'wrong') { toast('كلمة المرور لم تعد صحيحة', 'error'); exitAdmin(); }
+    else if (r === 'locked') { toast('محاولات كثيرة، حاول بعد 5 دقائق', 'error'); refreshSave(); }
+    else { toast('تعذّر الحفظ', 'error'); refreshSave(); }
+  } catch { toast('تعذّر الاتصال، لم يُحفظ شيء', 'error'); refreshSave(); }
 }
 function openSheet(id, list, title, onPick) {
   const now = $(id).value;
   $('drawer-title').textContent = title;
   $('opts').replaceChildren(...list.map(s =>
     h('button', { class: 'opt' + (s === now ? ' sel' : ''), type: 'button', text: s,
-      onclick: () => { $(id).value = s; if (onPick) onPick(s); closeSheet(); } })));
+      onclick: () => { $(id).value = s; $(id).dispatchEvent(new Event('input', { bubbles: true })); if (onPick) onPick(s); closeSheet(); } })));
   $('drawer-bg').classList.add('on');
 }
 function pickPublisher(name) {
@@ -331,9 +468,8 @@ function collect(type) {
 
 // ---------- توليد المنشور ونسخه ----------
 function generate() {
-  const day = $('u-day').value;
-  const mNum = MONTHS.indexOf($('g-m').value) + 1;
-  const date = `${$('g-d').value} / ${$('g-m').value} ( ${mNum} ) / ${$('g-y').value} م`;
+  const day = DAYS[curDate.getDay()];
+  const date = `${curDate.getDate()} / ${MONTHS[curDate.getMonth()]} ( ${curDate.getMonth() + 1} ) / ${curDate.getFullYear()} م`;
   const lessons = [1, 2, 3, 4, 5, 6].map(i => `${i}. ${$('ul-' + i).value}`).join('\n');
   const contact = $('u-contact').value.trim();
   const text = [
@@ -363,31 +499,116 @@ async function copyResult() {
   toast(ok ? 'تم نسخ المنشور' : 'تعذّر النسخ، انسخ النص يدوياً');
 }
 
+// ---------- إدارة البيانات (للمدير) ----------
+const MGR = {
+  pubs:  { label: 'ناشر', save: 'admin_save_supervisor', del: 'admin_delete_supervisor' },
+  roles: { label: 'منصب', save: 'admin_save_role',       del: 'admin_delete_role' },
+  subs:  { label: 'مادة', save: 'admin_save_subject',    del: 'admin_delete_subject' }
+};
+let mgrTab = 'pubs', mgrData = { pubs: [], roles: [], subs: [] };
+async function mgrFetch() {
+  const [pubs, roles, subs] = await Promise.all([
+    sb('supervisors?select=id,name,username,role_id,role:roles(name)&order=id'),
+    sb('roles?select=id,name&order=id'), sb('subjects?select=id,name&order=id')]);
+  mgrData = { pubs, roles, subs };
+}
+async function openMgr() {
+  $('mgr-bg').classList.add('on');
+  try { await mgrFetch(); } catch { toast('تعذّر تحميل البيانات', 'error'); }
+  renderMgr();
+}
+function closeMgr() { $('mgr-bg').classList.remove('on'); }
+function mgrSwitch(t) { mgrTab = t; renderMgr(); }
+function renderMgr() {
+  document.querySelectorAll('.mgr-tab').forEach(b => b.classList.toggle('on', b.dataset.t === mgrTab));
+  $('mgr-add').style.display = '';
+  $('mgr-add-label').textContent = 'إضافة ' + MGR[mgrTab].label;
+  $('mgr-hint').textContent = mgrTab === 'subs' ? 'تغيير اسم مادة لا يغيّر الجداول المحفوظة سابقاً، عدّلها من وضع المدير.' : '';
+  const rows = mgrData[mgrTab];
+  $('mgr-body').replaceChildren(...(rows.length ? rows.map(mgrRow) : [h('div', { class: 'empty', text: 'لا توجد عناصر بعد' })]));
+}
+function mgrRow(r) {
+  const sub = mgrTab === 'pubs' ? [r.username, r.role ? r.role.name : ''].filter(Boolean).join(' • ') : '';
+  return h('div', { class: 'mrow' },
+    h('div', { class: 'mtext' }, h('b', { text: r.name }), sub ? h('small', { text: sub }) : ''),
+    h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'تعديل', onclick: () => mgrForm(r) }, ic('edit')),
+    h('button', { class: 'icon-btn danger', type: 'button', 'aria-label': 'حذف', onclick: () => mgrDelete(r) }, ic('delete')));
+}
+function mgrForm(r) {
+  const isPub = mgrTab === 'pubs';
+  const field = (label, el) => h('div', { class: 'field' }, h('label', { text: label }), el);
+  const name = h('input', { type: 'text', id: 'm-name', maxlength: '60', 'aria-label': 'الاسم' });
+  name.value = r ? r.name : '';
+  const kids = [h('b', { text: (r ? 'تعديل ' : 'إضافة ') + MGR[mgrTab].label, style: 'display:block;margin-bottom:12px' }), field('الاسم', name)];
+  if (isPub) {
+    const user = h('input', { type: 'text', id: 'm-user', dir: 'ltr', placeholder: '@username', maxlength: '40', 'aria-label': 'اليوزر' });
+    user.value = r ? r.username : '';
+    const role = h('select', { id: 'm-role', 'aria-label': 'المنصب' },
+      h('option', { value: '', text: 'بدون منصب' }), mgrData.roles.map(x => h('option', { value: x.id, text: x.name })));
+    role.value = r && r.role_id ? String(r.role_id) : '';
+    kids.push(field('اليوزر (تيليجرام)', user), field('المنصب', role));
+  }
+  kids.push(h('div', { style: 'display:flex;gap:10px' },
+    h('button', { class: 'btn pri', type: 'button', style: 'flex:1', onclick: () => mgrSave(r) }, ic('check'), 'حفظ'),
+    h('button', { class: 'btn ghost', type: 'button', onclick: () => renderMgr() }, 'إلغاء')));
+  $('mgr-body').replaceChildren(...kids);
+  $('mgr-add').style.display = 'none';
+  $('mgr-hint').textContent = '';
+  name.focus();
+}
+function mgrSave(r) {
+  const body = { pw: adminPw, p_id: r ? r.id : null, p_name: $('m-name').value };
+  if (mgrTab === 'pubs') {
+    body.p_username = $('m-user').value;
+    body.p_role_id = $('m-role').value ? +$('m-role').value : null;
+  }
+  return mgrCall(MGR[mgrTab].save, body, 'saved', 'تم الحفظ');
+}
+function mgrDelete(r) {
+  if (!confirm(`حذف "${r.name}"؟`)) return;
+  return mgrCall(MGR[mgrTab].del, { pw: adminPw, p_id: r.id }, 'deleted', 'تم الحذف');
+}
+async function mgrCall(fn, body, okStatus, okMsg) {
+  try {
+    const res = await sb('rpc/' + fn, body);
+    if (res === okStatus) {
+      toast(okMsg);
+      await mgrFetch(); renderMgr();
+      await loadData(); fillRoles(); defaultPublisher();
+    } else if (res === 'wrong') { toast('كلمة المرور لم تعد صحيحة', 'error'); exitAdmin(); }
+    else toast(res === 'duplicate' ? 'هذا الاسم موجود مسبقاً' : res === 'locked' ? 'محاولات كثيرة، حاول بعد 5 دقائق' : 'بيانات غير صالحة', 'error');
+  } catch (e) { toast('تعذّر الحفظ (' + e.message + ')', 'error'); }
+}
+
 // ---------- التشغيل ----------
-(function boot() {
+function fillRoles() { $('u-role').replaceChildren(...ROLES.map(r => opt(r))); }
+function defaultPublisher() {
+  if (!PUBLISHERS[0]) return;
+  $('u-pub').value = PUBLISHERS[0].name;
+  pickPublisher(PUBLISHERS[0].name);
+}
+(async function boot() {
   let saved = null; try { saved = localStorage.getItem('theme'); } catch {}
   applyTheme(saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches);
   if (document.fonts) document.fonts.load('22px "Material Icons Round"', 'menu_book')
     .then(f => { if (f.length) document.documentElement.classList.add('icons'); }).catch(() => {});
 
-  const y = new Date().getFullYear();
-  $('g-m').replaceChildren(...MONTHS.map(m => opt(m)));
-  $('g-y').replaceChildren(...[y - 1, y, y + 1, y + 2].map(v => opt(v)));
-  $('u-day').replaceChildren(...DAYS.map(d => opt(d)));
-  $('u-role').replaceChildren(...ROLES.map(r => opt(r)));
   const pub = $('u-pub');
-  pub.value = PUBLISHERS[0] ? PUBLISHERS[0].name : '';
-  if (PUBLISHERS[0]) pickPublisher(PUBLISHERS[0].name);
   pub.addEventListener('click', () => { if (pub.hasAttribute('readonly')) openSheet('u-pub', PUBLISHERS.map(p => p.name), 'اختر الناشر', pickPublisher); });
   pub.addEventListener('blur', () => pub.setAttribute('readonly', ''));
   $('pub-pen').addEventListener('click', () => {
     pub.removeAttribute('readonly'); pub.focus(); pub.setSelectionRange(pub.value.length, pub.value.length);
   });
-  setDate(1);
 
   const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
   $('home-next').textContent = fmt(tomorrow);
+  fillRoles(); defaultPublisher();
+  setDate(1);
   checkEmpty('hw'); checkEmpty('ex');
+
+  const ok = await loadData();
+  fillRoles(); defaultPublisher(); loadSchedule();
+  if (!ok) toast('تعذّر الاتصال، تُستخدم آخر بيانات محفوظة', 'error');
 })();
 </script>
 </body>
