@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>واجبات باچر | منشور الواجبات والجدول الدراسي اليومي لقناة تيليجرام</title>
-<meta name="description" content="واجبات باچر (واجبات باجر): أداة مجانية تجهّز منشور الواجبات وجدول الدروس والامتحانات اليومي، جاهزاً للنسخ إلى قناتك على تيليجرام.">
+<meta name="description" content="أنشئ منشور الجدول والواجبات والامتحانات اليومي لقناتك على تيليجرام في دقيقة، وانسخه بالتنسيق الصحيح. واجبات باچر أداة مجانية.">
 <meta name="keywords" content="واجبات باچر, واجبات باجر, واجبات الغد, جدول الدروس, جدول الامتحانات, واجبات مدرسية, منشور الواجبات, قناة تيليجرام">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="author" content="رضا محمد">
@@ -37,14 +37,14 @@
 :root{
   --green:#0E4D3A;--green2:#1B7A57;--on-green:#FFFFFF;--gold:#C9A24A;--gold-l:#F4E7BF;
   --cream:#FBF7EC;--paper:#FFFFFF;--ink:#17261F;--muted:#56655D;
-  --line:#E2D9C0;--field:#F8F4E7;--danger:#B3261E;
+  --line:#E2D9C0;--field:#F8F4E7;--danger:#B3261E;--focus:#1B7A57;--green-h:#0A3B2B;--ghost-h:#F1EBD8;
   --bubble:#0E4D3A;--bubble-ink:#FBF7EC;
   --shadow:0 1px 2px rgba(14,77,58,.08),0 10px 28px -14px rgba(14,77,58,.35);
 }
 :root.dark{
   --green:#86D6B2;--green2:#3FA27B;--on-green:#0C1A15;--gold:#E2BD63;--gold-l:#3B3218;
   --cream:#0C1A15;--paper:#13261F;--ink:#EAF3EE;--muted:#A4BDB2;
-  --line:#26453B;--field:#18302A;--danger:#FF8A80;
+  --line:#26453B;--field:#18302A;--danger:#FF8A80;--focus:#E2BD63;--green-h:#A8E6CA;--ghost-h:#1B3A31;
   --bubble:#06140F;--bubble-ink:#EAF3EE;
   --shadow:0 12px 30px -14px rgba(0,0,0,.7);
 }
@@ -55,20 +55,20 @@ body{min-height:100vh;color:var(--ink);font:500 16px/1.75 Cairo,system-ui,sans-s
   padding-bottom:calc(28px + env(safe-area-inset-bottom));transition:background-color .3s,color .3s}
 body[data-v=wiz]{padding-bottom:calc(112px + env(safe-area-inset-bottom))}
 h1,h2,h3{font-family:Cairo,sans-serif;font-weight:800;line-height:1.3}
-:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 .material-icons-round{width:1em;height:1em;overflow:hidden;font-size:22px;visibility:hidden}
 .icons .material-icons-round{visibility:visible}
 .wrap{max-width:620px;margin:0 auto;padding:0 16px}
 .view{display:none}.view.on{display:block}
 
 .top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:calc(10px + env(safe-area-inset-top)) 16px 10px;background:color-mix(in srgb,var(--cream) 88%,transparent);
-  backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  padding:calc(10px + env(safe-area-inset-top)) 16px 10px;background:var(--cream);border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:10px;font:800 20px Cairo,sans-serif;color:var(--green)}
 .brand img{width:42px;height:42px;border-radius:50%;border:2px solid var(--gold);background:#fff}
 .icon-btn{width:44px;height:44px;flex:none;display:inline-grid;place-items:center;border:1px solid var(--line);
   border-radius:14px;background:var(--paper);color:var(--ink);cursor:pointer;box-shadow:var(--shadow)}
 .icon-btn.danger{color:var(--danger)}
+.icon-btn:hover{border-color:var(--green)}
 .netnote{display:flex;align-items:center;gap:8px;margin:12px auto 0;width:min(100% - 32px,620px);padding:10px 14px;
   border-radius:14px;background:var(--gold-l);color:var(--ink);font-size:14px;font-weight:700}
 .netnote .btn{margin-inline-start:auto}
@@ -87,6 +87,8 @@ h1{font-size:36px;color:var(--green);margin-bottom:6px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 20px;border:0;border-radius:14px;
   font:700 16px Cairo,sans-serif;cursor:pointer;transition:transform .08s,opacity .2s}
 .btn.pri{background:var(--green);color:var(--on-green)}
+.btn.pri:hover{background:var(--green-h)}
+.btn.ghost:hover{background:var(--ghost-h);border-color:var(--green)}
 .btn.ghost{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
 .btn.sm{height:40px;padding:0 14px;font-size:14px}
 .btn.big{width:100%;height:56px;font-size:18px}
@@ -97,11 +99,15 @@ h1{font-size:36px;color:var(--green);margin-bottom:6px}
 .about h2{font-size:22px;color:var(--green);margin-bottom:6px}
 .about p{color:var(--muted)}
 details{margin-top:10px;padding:10px 14px;border-radius:14px;background:var(--field);border:1px solid var(--line)}
-summary{font-weight:700;cursor:pointer}
+summary{display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:700;cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'';width:9px;height:9px;flex:none;border-left:2px solid var(--green);border-bottom:2px solid var(--green);transform:rotate(-45deg);transition:transform .2s}
+details[open] summary::after{transform:rotate(135deg)}
+details:hover{border-color:var(--green)}
 details p{margin-top:6px}
 .credit{margin-top:22px;text-align:center;color:var(--muted);font-size:14px;font-weight:700}
 .lock{display:block;margin:6px auto 0;width:44px;height:44px;border:0;background:transparent;color:var(--muted);opacity:.6;cursor:pointer}
-.lock:hover,.lock:focus-visible{opacity:1}
+.lock:hover,.lock:focus-visible{opacity:1;color:var(--green)}
 
 .prog{display:flex;gap:6px;margin:14px 0 12px}
 .prog i{flex:1;height:6px;border-radius:6px;background:var(--line)}
@@ -123,6 +129,7 @@ textarea{min-height:84px;resize:vertical}
 .sr-date{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
 
 .datebar{display:flex;gap:8px}
+.dnav:hover,.dcur:hover{border-color:var(--green)}
 .dnav{flex:0 0 72px;height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
   border:1px solid var(--line);border-radius:16px;background:var(--field);color:var(--green);font:700 12px Cairo,sans-serif;cursor:pointer}
 .dcur{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid var(--line);
@@ -132,7 +139,9 @@ textarea{min-height:84px;resize:vertical}
 .dcal .material-icons-round{font-size:16px}
 .quick{display:flex;gap:8px;margin-bottom:18px;justify-content:center}
 .chip{height:40px;padding:0 20px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);font:700 15px Cairo,sans-serif;cursor:pointer}
+.chip:hover{border-color:var(--green)}
 .chip.on{background:var(--green);border-color:var(--green);color:var(--on-green)}
+.chip.on:hover{background:var(--green-h);color:var(--on-green)}
 
 .periods{display:grid;gap:10px;margin-top:14px}
 .period{display:flex;gap:10px;align-items:center}
@@ -152,7 +161,7 @@ textarea{min-height:84px;resize:vertical}
   white-space:pre-wrap;word-break:break-word;line-height:1.85;font-size:15px;box-shadow:var(--shadow)}
 
 .bar{position:fixed;inset:auto 0 0 0;z-index:30;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
-  background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+  background:var(--paper);border-top:1px solid var(--line)}
 .bar-in{max-width:620px;margin:0 auto;display:flex;gap:10px}
 .bar-in .ghost{flex:0 0 auto}.bar-in .pri{flex:1}
 body:not([data-v=wiz]) .bar{display:none}
@@ -166,7 +175,9 @@ body:not([data-v=wiz]) .bar{display:none}
 .drawer h3{margin-bottom:12px;font-size:22px;color:var(--green)}
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .opt{min-height:48px;padding:8px;border:1px solid var(--line);border-radius:12px;background:var(--field);color:var(--ink);font:700 15px Cairo,sans-serif;cursor:pointer}
+.opt:hover{border-color:var(--green)}
 .opt.sel{background:var(--green);border-color:var(--green);color:var(--on-green)}
+.opt.sel:hover{background:var(--green-h);color:var(--on-green)}
 
 .toast{position:fixed;left:50%;bottom:calc(104px + env(safe-area-inset-bottom));z-index:60;display:flex;align-items:center;gap:8px;
   width:max-content;max-width:calc(100vw - 32px);padding:10px 18px;border-radius:999px;background:var(--green);color:var(--on-green);
@@ -207,7 +218,7 @@ body.admin .admin-only{display:inline-flex!important;align-items:center;justify-
   <div class="hero">
     <img class="hero-logo" src="icon.png" alt="شعار واجبات باچر" width="132" height="132">
     <h1>واجبات باچر</h1>
-    <p class="tagline">منشور الواجبات والجدول الدراسي اليومي لقناتك على تيليجرام</p>
+    <p class="tagline">أنشئ منشور الجدول والواجبات والامتحانات لقناتك على تيليجرام في دقيقة، وانسخه جاهزاً بالتنسيق الصحيح.</p>
     <div class="next-card">
       <span class="logo"><span class="material-icons-round">event</span></span>
       <div><small>تاريخ المنشور القادم</small><span class="hl" id="home-next"></span></div>
@@ -218,10 +229,10 @@ body.admin .admin-only{display:inline-flex!important;align-items:center;justify-
 
   <section class="about panel" aria-labelledby="about-title">
     <h2 id="about-title">ما هي واجبات باچر؟</h2>
-    <p>واجبات باچر (باجر بمعنى غداً بالعامية) أداة مجانية تجهّز لك منشور الواجبات اليومي في دقيقة واحدة: تختار التاريخ فيظهر جدول دروس ذلك اليوم تلقائياً، ثم تضيف الواجبات والامتحانات، وتنسخ المنشور المنسّق لتنشره في قناتك على تيليجرام.</p>
-    <details><summary>كيف أنشئ منشور الواجبات؟</summary><p>اضغط «ابدأ المنشور» واتبع الخطوات: التاريخ، ثم جدول الدروس، ثم الواجبات، ثم الامتحانات، ثم بيانات الناشر. بعد ذلك انسخ النص الجاهز وانشره.</p></details>
-    <details><summary>هل الأداة مجانية؟</summary><p>نعم، الاستخدام مجاني ولا يحتاج إلى حساب أو تسجيل.</p></details>
-    <details><summary>هل يظهر المنشور بالاتجاه الصحيح في تيليجرام؟</summary><p>نعم، يُنسخ النص مضبوطاً من اليمين إلى اليسار، بما فيه الفواصل والأرقام والوسوم.</p></details>
+    <p>يعرض المنشور اليوم والتاريخ، والدروس الستة في جدول ذلك اليوم، والواجبات والامتحانات مرتبة حسب المادة، واسم الناشر ومنصبه ويوزره للتواصل. تختار التاريخ فيحمّل الجدول تلقائياً من قاعدة البيانات، ثم تنسخ النص لتنشره مباشرة.</p>
+    <details><summary>كيف أنشئ منشوراً؟</summary><p>اضغط «ابدأ المنشور» وانتقل بين الخطوات الخمس: التاريخ، الدروس، الواجبات، الامتحانات، الناشر. ثم اضغط «توليد المنشور» وانسخه.</p></details>
+    <details><summary>هل أحتاج حساباً للاستخدام؟</summary><p>لا، يكفي فتح الصفحة. وتعمل دون إنترنت بعد أول فتح، بآخر بيانات محفوظة في الجهاز.</p></details>
+    <details><summary>هل يظهر المنشور من اليمين إلى اليسار في تيليجرام؟</summary><p>نعم، يُنسخ النص مع علامات الاتجاه، فتظهر الفواصل والأرقام والوسوم بالترتيب الصحيح.</p></details>
   </section>
 
   <p class="credit">برمجة وتطوير : رضا محمد</p>
