@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#0E4D3A">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="واجبات باچر">
-<link rel="canonical" href="https://rmsup.site/">
+<link rel="canonical" href="https://post.rmsup.site/">
 <link rel="icon" type="image/png" sizes="512x512" href="icon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
@@ -21,12 +21,12 @@
 <meta property="og:site_name" content="واجبات باچر">
 <meta property="og:title" content="واجبات باچر | منشور الواجبات اليومي">
 <meta property="og:description" content="جهّز منشور الواجبات وجدول الدروس والامتحانات في دقيقة، وانسخه إلى قناتك على تيليجرام.">
-<meta property="og:url" content="https://rmsup.site/">
-<meta property="og:image" content="https://rmsup.site/icon.png">
+<meta property="og:url" content="https://post.rmsup.site/">
+<meta property="og:image" content="https://post.rmsup.site/icon.png">
 <meta property="og:image:alt" content="شعار واجبات باچر">
 <meta name="twitter:card" content="summary">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"واجبات باچر","alternateName":"واجبات باجر","url":"https://rmsup.site/","inLanguage":"ar"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"واجبات باچر","alternateName":"واجبات باجر","url":"https://post.rmsup.site/","inLanguage":"ar"}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,168 +34,197 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
 <style>
 [hidden]{display:none!important}
-:root{
-  --green:#0E4D3A;--green2:#1B7A57;--on-green:#FFFFFF;--gold:#C9A24A;--gold-l:#F4E7BF;
-  --cream:#FBF7EC;--paper:#FFFFFF;--ink:#17261F;--muted:#56655D;
-  --line:#E2D9C0;--field:#F8F4E7;--danger:#B3261E;--focus:#1B7A57;--green-h:#0A3B2B;--ghost-h:#F1EBD8;
-  --bubble:#0E4D3A;--bubble-ink:#FBF7EC;
-  --shadow:0 1px 2px rgba(14,77,58,.08),0 10px 28px -14px rgba(14,77,58,.35);
-}
-:root.dark{
-  --green:#86D6B2;--green2:#3FA27B;--on-green:#0C1A15;--gold:#E2BD63;--gold-l:#3B3218;
-  --cream:#0C1A15;--paper:#13261F;--ink:#EAF3EE;--muted:#A4BDB2;
-  --line:#26453B;--field:#18302A;--danger:#FF8A80;--focus:#E2BD63;--green-h:#A8E6CA;--ghost-h:#1B3A31;
-  --bubble:#06140F;--bubble-ink:#EAF3EE;
-  --shadow:0 12px 30px -14px rgba(0,0,0,.7);
-}
+:root{--bg:#EEF2EE;--paper:#FFFFFF;--ink:#14231C;--muted:#66776E;--line:#E2E8E3;--field:#F3F6F3;
+  --green:#0E4D3A;--green-2:#1B7A57;--green-h:#0A3B2B;--ghost-h:#EEF4EF;--gold:#C9A24A;--gold-l:#F4E7BF;
+  --ok:#1B7A57;--ok-bg:#E3F3EA;--danger:#B3261E;--bad-bg:#FBE4E2;--bubble:#DCEFE4;--on-green:#FFFFFF;--focus:#1B7A57;
+  --shadow:0 1px 2px rgba(14,40,30,.08);--ease:cubic-bezier(.2,.8,.2,1)}
+:root.dark{--bg:#0B1612;--paper:#13221C;--ink:#E9F3EE;--muted:#9AB3A8;--line:#22372F;--field:#192B24;
+  --green:#8ED8B5;--green-2:#49B087;--green-h:#B5EBD0;--ghost-h:#1A3029;--gold:#E2BD63;--gold-l:#3B3218;
+  --ok:#8ED8B5;--ok-bg:#163A2C;--danger:#FF8A80;--bad-bg:#3D1F1D;--bubble:#1C3A2F;--on-green:#0B1612;--focus:#E2BD63;
+  --shadow:0 1px 2px rgba(0,0,0,.4)}
 *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
-html{min-height:100%;background:var(--cream)}
-body{min-height:100vh;color:var(--ink);font:500 16px/1.75 Cairo,system-ui,sans-serif;
-  background:radial-gradient(900px 420px at 50% -120px,rgba(201,162,74,.18),transparent 70%),var(--cream);
-  padding-bottom:calc(28px + env(safe-area-inset-bottom));transition:background-color .3s,color .3s}
-body[data-v=wiz]{padding-bottom:calc(112px + env(safe-area-inset-bottom))}
-h1,h2,h3{font-family:Cairo,sans-serif;font-weight:800;line-height:1.3}
-:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
-.material-icons-round{width:1em;height:1em;overflow:hidden;font-size:22px;visibility:hidden}
+html{background:var(--bg)}
+body{min-height:100vh;background:var(--bg);color:var(--ink);font:500 16px/1.7 Cairo,system-ui,sans-serif;padding-bottom:calc(88px + env(safe-area-inset-bottom));transition:background-color .3s,color .3s}
+body[data-v=wiz]{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+body.lock{overflow:hidden}
+h1,h2,h3{font-weight:800;line-height:1.35}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:10px}
+.material-icons-round{width:1em;height:1em;overflow:hidden;font-size:22px;visibility:hidden;vertical-align:middle;display:inline-block}
 .icons .material-icons-round{visibility:visible}
-.wrap{max-width:620px;margin:0 auto;padding:0 16px}
-.view{display:none}.view.on{display:block}
+.admin-only{display:none!important}
+body.admin .admin-only{display:inline-flex!important;align-items:center;justify-content:center}
+.wrap{max-width:640px;margin:0 auto;padding:0 12px}
+.view{display:none}
+.view.on{display:block;animation:fadeIn .3s var(--ease)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes up{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(27,122,87,.35)}50%{box-shadow:0 0 0 5px rgba(27,122,87,0)}}
+@keyframes rip{to{transform:scale(4);opacity:0}}
 
-.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:calc(10px + env(safe-area-inset-top)) 16px 10px;background:var(--cream);border-bottom:1px solid var(--line)}
-.brand{display:flex;align-items:center;gap:10px;font:800 20px Cairo,sans-serif;color:var(--green)}
-.brand img{width:42px;height:42px;border-radius:50%;border:2px solid var(--gold);background:#fff}
-.icon-btn{width:44px;height:44px;flex:none;display:inline-grid;place-items:center;border:1px solid var(--line);
-  border-radius:14px;background:var(--paper);color:var(--ink);cursor:pointer;box-shadow:var(--shadow)}
+/* الشريط العلوي */
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:calc(8px + env(safe-area-inset-top)) 12px 8px;background:var(--green);color:#fff;box-shadow:0 1px 0 rgba(0,0,0,.1)}
+.brand{display:flex;align-items:center;gap:10px;font:800 18px Cairo,sans-serif;color:#fff}
+.brand img{width:36px;height:36px;border-radius:50%;border:2px solid var(--gold);background:#fff}
+.tools{display:flex;gap:4px;align-items:center}
+.icon-btn{width:40px;height:40px;flex:none;display:inline-grid;place-items:center;border:0;border-radius:50%;
+  background:rgba(255,255,255,.12);color:#fff;cursor:pointer;transition:background .2s,transform .12s}
+.icon-btn:hover{background:rgba(255,255,255,.22)}
+.icon-btn:active{transform:scale(.92)}
 .icon-btn.danger{color:var(--danger)}
-.icon-btn:hover{border-color:var(--green)}
-.netnote{display:flex;align-items:center;gap:8px;margin:12px auto 0;width:min(100% - 32px,620px);padding:10px 14px;
-  border-radius:14px;background:var(--gold-l);color:var(--ink);font-size:14px;font-weight:700}
-.netnote .btn{margin-inline-start:auto}
+.panel .icon-btn,.drawer .icon-btn,.appt-acts .icon-btn,.mrow .icon-btn,.entry .icon-btn{background:var(--field);color:var(--ink)}
+.panel .icon-btn:hover,.drawer .icon-btn:hover,.appt-acts .icon-btn:hover,.mrow .icon-btn:hover,.entry .icon-btn:hover{background:var(--ghost-h)}
+.lock-on{background:var(--gold)!important;color:var(--green)!important}
 
-.hero{padding:18px 0 6px;text-align:center}
-.hero-logo{display:block;width:148px;height:148px;margin:0 auto 14px;border-radius:50%;background:#fff;
-  box-shadow:0 0 0 5px var(--gold-l),0 0 0 7px var(--gold),var(--shadow)}
-h1{font-size:36px;color:var(--green);margin-bottom:6px}
-.tagline{max-width:32ch;margin:0 auto 22px;color:var(--muted);font-size:17px}
-.next-card{display:flex;align-items:center;gap:14px;padding:14px 16px;margin-bottom:14px;text-align:right;
-  background:var(--paper);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
-.next-card small{display:block;color:var(--muted);font-size:14px;font-weight:700}
-.logo{width:46px;height:46px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--gold-l);color:var(--green)}
-.hl{display:inline-block;padding:2px 14px;border-radius:999px;background:var(--gold-l);color:var(--ink);font-weight:800;font-size:17px}
+/* الملف الشخصي والمجموعات (أسلوب تيليجرام) */
+.profile{display:flex;flex-direction:column;align-items:center;text-align:center;padding:22px 16px 18px;background:var(--paper);border-bottom:1px solid var(--line);margin-bottom:12px}
+.avatar{width:96px;height:96px;border-radius:50%;background:#fff;border:3px solid var(--gold);margin-bottom:10px}
+.profile h1{font-size:24px;color:var(--green)}
+.profile .sub{color:var(--muted);font-size:14px;max-width:34ch}
+.group{background:var(--paper);border-radius:14px;margin:0 12px 12px;overflow:hidden;box-shadow:var(--shadow)}
+.row{display:flex;align-items:center;gap:12px;width:100%;min-height:62px;padding:10px 14px;border:0;background:none;color:var(--ink);text-align:start;cursor:pointer;transition:background .15s}
+.row:hover{background:var(--field)}
+.row.static{cursor:default}
+.row.static:hover{background:none}
+.row+.row{border-top:1px solid var(--line)}
+.ico{width:40px;height:40px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--green);color:#fff}
+.ico.soft{background:var(--gold-l);color:var(--green)}
+.body{flex:1;min-width:0;display:flex;flex-direction:column}
+.body b{font-weight:700;font-size:16px}
+.body small{color:var(--muted);font-size:13px;font-weight:600}
+.chev{color:var(--muted)}
+.sect{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px 20px 6px;color:var(--muted);font-size:13px;font-weight:700}
+.link{background:none;border:0;color:var(--green-2);font:700 14px Cairo,sans-serif;cursor:pointer;padding:6px 8px;border-radius:8px}
+.link:hover{background:var(--gold-l)}
 
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 20px;border:0;border-radius:14px;
-  font:700 16px Cairo,sans-serif;cursor:pointer;transition:transform .08s,opacity .2s}
-.btn.pri{background:var(--green);color:var(--on-green)}
-.btn.pri:hover{background:var(--green-h)}
-.btn.ghost:hover{background:var(--ghost-h);border-color:var(--green)}
-.btn.ghost{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
-.btn.sm{height:40px;padding:0 14px;font-size:14px}
-.btn.big{width:100%;height:56px;font-size:18px}
-.btn:active{transform:scale(.98)}
-.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+/* المواعيد */
+.appt-list{list-style:none;margin:0;padding:0}
+.appt{display:flex;align-items:center;gap:12px;padding:12px 14px;min-height:62px;animation:rise .35s var(--ease) both;animation-delay:calc(var(--i,0) * 45ms)}
+.appt+.appt{border-top:1px solid var(--line)}
+.appt-main{flex:1;min-width:0}
+.appt h3{font-size:15px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.appt-date{display:flex;align-items:center;gap:4px;color:var(--muted);font-size:13px;font-weight:600}
+.appt-date .material-icons-round{font-size:15px}
+.pill{flex:none;padding:2px 11px;border-radius:999px;font-size:12px;font-weight:800;background:var(--ok-bg);color:var(--ok)}
+.pill.soon{animation:pulse 2.4s ease-in-out infinite}
+.appt.past .pill{background:var(--bad-bg);color:var(--danger)}
+.appt-acts{display:flex;gap:4px;flex:none}
+.appt-acts .icon-btn{width:34px;height:34px}
+.appt-empty{padding:18px;text-align:center;color:var(--muted);font-weight:700}
+.page-title{padding:14px 20px 6px;font-size:22px;color:var(--green)}
 
-.about{margin-top:18px;text-align:right}
-.about h2{font-size:22px;color:var(--green);margin-bottom:6px}
-.about p{color:var(--muted)}
-details{margin-top:10px;padding:10px 14px;border-radius:14px;background:var(--field);border:1px solid var(--line)}
-summary{display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:700;cursor:pointer;list-style:none}
-summary::-webkit-details-marker{display:none}
-summary::after{content:'';width:9px;height:9px;flex:none;border-left:2px solid var(--green);border-bottom:2px solid var(--green);transform:rotate(-45deg);transition:transform .2s}
-details[open] summary::after{transform:rotate(135deg)}
-details:hover{border-color:var(--green)}
-details p{margin-top:6px}
-.credit{margin-top:22px;text-align:center;color:var(--muted);font-size:14px;font-weight:700}
-.lock{display:block;margin:6px auto 0;width:44px;height:44px;border:0;background:transparent;color:var(--muted);opacity:.6;cursor:pointer}
-.lock:hover,.lock:focus-visible{opacity:1;color:var(--green)}
-
-.prog{display:flex;gap:6px;margin:14px 0 12px}
-.prog i{flex:1;height:6px;border-radius:6px;background:var(--line)}
-.prog i.on{background:var(--gold)}
-.ptitle{margin-bottom:12px}
-.ptitle small{display:block;color:var(--green2);font-weight:700;font-size:14px}
-.ptitle h2{font-size:28px;color:var(--green)}
-.step{display:none}.step.on{display:block}
-.panel{position:relative;padding:20px;background:var(--paper);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
-.hint{display:flex;align-items:center;gap:8px;margin-top:14px;color:var(--muted);font-size:14px;font-weight:600}
+/* خطوات المنشور */
+.prog{display:flex;gap:6px;padding:12px 14px 0}
+.prog i{flex:1;height:4px;border-radius:4px;background:var(--line);transition:background .4s}
+.prog i.on{background:var(--green-2)}
+.ptitle{padding:12px 18px 6px}
+.ptitle small{display:block;color:var(--muted);font-weight:700;font-size:13px}
+.ptitle h2{font-size:24px;color:var(--green)}
+.step{display:none}
+.step.on{display:block;animation:rise .3s var(--ease)}
+.panel{position:relative;background:var(--paper);border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.hint{display:flex;align-items:center;gap:6px;margin-top:10px;color:var(--muted);font-size:13px;font-weight:600}
 .hint .material-icons-round{color:var(--gold)}
-
 label{display:block;margin-bottom:6px;color:var(--muted);font-weight:700;font-size:14px}
-input,select,textarea{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--field);color:var(--ink);font:500 16px Cairo,sans-serif}
-input:focus,select:focus,textarea:focus{border-color:var(--gold);outline:none}
-select{appearance:none;padding-inline-start:38px;background:var(--field) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%2356655D' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat left 12px center}
-textarea{min-height:84px;resize:vertical}
-.field{margin-bottom:16px}
+input,select,textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--field);color:var(--ink);font:500 16px Cairo,sans-serif;transition:border-color .2s,box-shadow .2s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green-2);box-shadow:0 0 0 3px rgba(27,122,87,.15)}
+select{appearance:none;padding-inline-start:36px;background:var(--field) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%2366776E' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat left 12px center}
+textarea{min-height:80px;resize:vertical}
+.field{margin-bottom:14px}
 .sr-date{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
-
 .datebar{display:flex;gap:8px}
-.dnav:hover,.dcur:hover{border-color:var(--green)}
-.dnav{flex:0 0 72px;height:92px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
-  border:1px solid var(--line);border-radius:16px;background:var(--field);color:var(--green);font:700 12px Cairo,sans-serif;cursor:pointer}
-.dcur{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid var(--line);
-  border-radius:16px;background:var(--field);color:var(--ink);font:700 15px Cairo,sans-serif;cursor:pointer}
-.dcur b{font:800 26px/1.3 Cairo,sans-serif;color:var(--green)}
-.dcal{display:flex;align-items:center;gap:4px;margin-top:2px;color:var(--muted);font-size:13px}
-.dcal .material-icons-round{font-size:16px}
-.quick{display:flex;gap:8px;margin-bottom:18px;justify-content:center}
-.chip{height:40px;padding:0 20px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);font:700 15px Cairo,sans-serif;cursor:pointer}
-.chip:hover{border-color:var(--green)}
-.chip.on{background:var(--green);border-color:var(--green);color:var(--on-green)}
-.chip.on:hover{background:var(--green-h);color:var(--on-green)}
-
-.periods{display:grid;gap:10px;margin-top:14px}
-.period{display:flex;gap:10px;align-items:center}
+.dnav{flex:0 0 74px;height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:0;border-radius:14px;background:var(--field);color:var(--green);font:700 12px Cairo,sans-serif;cursor:pointer;transition:background .2s}
+.dnav:hover{background:var(--ghost-h)}
+.dcur{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border:0;border-radius:14px;background:var(--field);color:var(--ink);font:700 15px Cairo,sans-serif;cursor:pointer}
+.dcur b{font:800 24px Cairo,sans-serif;color:var(--green)}
+.dcal{display:flex;align-items:center;gap:4px;margin-top:2px;color:var(--muted);font-size:12px}
+.dcal .material-icons-round{font-size:15px}
+.quick{display:flex;gap:8px;justify-content:center;margin-bottom:12px}
+.chip{height:36px;padding:0 18px;border:0;border-radius:999px;background:var(--field);color:var(--ink);font:700 14px Cairo,sans-serif;cursor:pointer}
+.chip:hover{background:var(--ghost-h)}
+.chip.on{background:var(--green);color:var(--on-green)}
+.day-note{margin-bottom:12px;padding:12px 14px;border-radius:14px;background:var(--gold-l)}
+.dn-title{font-weight:800;color:var(--green);font-size:15px;margin-bottom:4px}
+.dn-item{display:flex;align-items:center;gap:8px;padding:6px 0;font-weight:600;font-size:15px}
+.dn-item .material-icons-round{color:var(--green)}
+.dn-item .pill{margin-inline-start:auto}
+.periods{display:grid;gap:8px;margin-top:8px}
+.period{display:flex;align-items:center;gap:10px}
 .period input{cursor:pointer}
-.num{width:40px;height:40px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--gold-l);color:var(--green);font:800 15px Cairo,sans-serif}
-.entry{display:grid;gap:10px;margin-bottom:12px;padding:12px;border:1px solid var(--line);border-radius:16px;background:var(--field)}
+.num{width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--gold-l);color:var(--green);font:800 14px Cairo,sans-serif}
+.entry{display:grid;gap:8px;padding:12px;border-radius:14px;background:var(--field);margin-bottom:10px}
 .entry input,.entry select,.entry textarea{background:var(--paper)}
 .entry-head{display:flex;gap:8px}
-.empty{display:flex;flex-direction:column;align-items:center;gap:4px;margin-bottom:12px;padding:22px;border:1.5px dashed var(--line);
-  border-radius:16px;color:var(--muted);font-weight:700;text-align:center}
-.mrow{display:flex;align-items:center;gap:8px;margin-bottom:10px;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:var(--field)}
-.mtext{flex:1;min-width:0;display:flex;flex-direction:column}
-.mtext small{color:var(--muted);font-weight:600}
-.mrow .icon-btn{width:40px;height:40px;box-shadow:none}
-
-.bubble{padding:18px;border-radius:18px 18px 6px 18px;background:var(--bubble);color:var(--bubble-ink);
-  white-space:pre-wrap;word-break:break-word;line-height:1.85;font-size:15px;box-shadow:var(--shadow)}
-
-.bar{position:fixed;inset:auto 0 0 0;z-index:30;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
-  background:var(--paper);border-top:1px solid var(--line)}
-.bar-in{max-width:620px;margin:0 auto;display:flex;gap:10px}
+.empty{padding:18px;text-align:center;color:var(--muted);font-weight:700;border:1px dashed var(--line);border-radius:14px;margin-bottom:10px}
+.bubble{padding:14px 16px;border-radius:16px 16px 4px 16px;background:var(--bubble);color:var(--ink);white-space:pre-wrap;word-break:break-word;line-height:1.85;font-size:15px;box-shadow:var(--shadow)}
+.bar{position:fixed;inset:auto 0 0 0;z-index:30;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--line)}
+.bar-in{max-width:640px;margin:0 auto;display:flex;gap:10px}
 .bar-in .ghost{flex:0 0 auto}.bar-in .pri{flex:1}
 body:not([data-v=wiz]) .bar{display:none}
 
-.drawer-bg{position:fixed;inset:0;z-index:50;display:none;align-items:flex-end;justify-content:center;background:rgba(8,28,20,.45)}
+/* الأزرار */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:50px;padding:0 20px;border:0;border-radius:14px;font:700 16px Cairo,sans-serif;cursor:pointer;position:relative;overflow:hidden;transition:background .2s,transform .12s,opacity .2s}
+.btn.pri{background:var(--green);color:var(--on-green)}
+.btn.pri:hover{background:var(--green-h)}
+.btn.ghost{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+.btn.ghost:hover{background:var(--ghost-h)}
+.btn.sm{height:36px;padding:0 14px;font-size:14px;border-radius:12px}
+.btn.big{width:100%;height:52px;font-size:17px}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.35);transform:scale(0);animation:rip .6s ease-out forwards;pointer-events:none}
+
+/* شريط التنقل السفلي (أسلوب تيليجرام) */
+.tabbar{position:fixed;inset:auto 0 0 0;z-index:30;display:flex;background:var(--paper);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
+.tab{flex:1;height:58px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;border:0;background:none;color:var(--muted);font:700 12px Cairo,sans-serif;cursor:pointer;transition:color .2s}
+.tab .material-icons-round{font-size:24px}
+.tab.on{color:var(--green)}
+body[data-v=wiz] .tabbar{display:none}
+
+/* النوافذ المنبثقة */
+.drawer-bg{position:fixed;inset:0;z-index:50;display:none;align-items:flex-end;justify-content:center;background:rgba(8,20,15,.45)}
 .drawer-bg.on{display:flex}
-.drawer{width:100%;max-width:620px;max-height:82vh;overflow:auto;padding:12px 16px calc(20px + env(safe-area-inset-bottom));
-  background:var(--paper);border-radius:22px 22px 0 0;animation:up .22s ease-out}
-@keyframes up{from{transform:translateY(40px);opacity:0}}
-.grab{width:44px;height:5px;margin:0 auto 14px;border-radius:3px;background:var(--line)}
-.drawer h3{margin-bottom:12px;font-size:22px;color:var(--green)}
-.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.opt{min-height:48px;padding:8px;border:1px solid var(--line);border-radius:12px;background:var(--field);color:var(--ink);font:700 15px Cairo,sans-serif;cursor:pointer}
-.opt:hover{border-color:var(--green)}
+.drawer{width:100%;max-width:640px;max-height:82vh;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:10px 16px calc(18px + env(safe-area-inset-bottom));background:var(--paper);border-radius:20px 20px 0 0;animation:up .25s var(--ease)}
+.grab{width:40px;height:4px;margin:0 auto 12px;border-radius:2px;background:var(--line)}
+.drawer h3{font-size:20px;color:var(--green)}
+.sheet-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.sheet-title h3{margin:0}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{min-height:46px;padding:8px;border:1px solid var(--line);border-radius:12px;background:var(--field);color:var(--ink);font:700 15px Cairo,sans-serif;cursor:pointer;transition:border-color .2s,background .2s}
+.opt:hover{border-color:var(--green-2)}
 .opt.sel{background:var(--green);border-color:var(--green);color:var(--on-green)}
-.opt.sel:hover{background:var(--green-h);color:var(--on-green)}
+.form-err{color:var(--danger);font-weight:700;font-size:14px;min-height:20px;margin-bottom:6px}
+.form-actions{display:flex;gap:10px;margin-top:8px}
+.form-actions .btn{flex:1}
+.mgr-tab{height:36px;padding:0 16px;border:0;border-radius:999px;background:var(--field);color:var(--ink);font:700 14px Cairo,sans-serif;cursor:pointer}
+.mgr-tab.on{background:var(--green);color:var(--on-green)}
+.mrow{display:flex;align-items:center;gap:8px;margin-bottom:8px;padding:10px 12px;border-radius:14px;background:var(--field)}
+.mtext{flex:1;min-width:0;display:flex;flex-direction:column}
+.mtext small{color:var(--muted);font-weight:600}
+.mrow .icon-btn{width:36px;height:36px}
 
-.toast{position:fixed;left:50%;bottom:calc(104px + env(safe-area-inset-bottom));z-index:60;display:flex;align-items:center;gap:8px;
-  width:max-content;max-width:calc(100vw - 32px);padding:10px 18px;border-radius:999px;background:var(--green);color:var(--on-green);
-  font:700 15px Cairo,sans-serif;box-shadow:var(--shadow);opacity:0;pointer-events:none;transform:translate(-50%,10px);transition:.25s}
+/* تنبيهات */
+.netnote{display:flex;align-items:center;gap:8px;margin:10px 12px 0;padding:10px 14px;border-radius:14px;background:var(--gold-l);color:var(--ink);font-size:14px;font-weight:700}
+.netnote .btn{margin-inline-start:auto;height:34px}
+.toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom));z-index:70;display:flex;align-items:center;gap:8px;width:max-content;max-width:calc(100vw - 32px);padding:10px 18px;border-radius:999px;background:var(--green);color:var(--on-green);font:700 15px Cairo,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.2);opacity:0;pointer-events:none;transform:translate(-50%,10px);transition:.25s}
 .toast.on{opacity:1;transform:translate(-50%,0)}
+.credit{text-align:center;color:var(--muted);font-size:13px;font-weight:700;padding:14px 0 8px}
+.about p{padding:12px 14px;color:var(--muted);font-size:15px}
+details{border-top:1px solid var(--line)}
+summary{padding:12px 14px;font-weight:700;cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'';width:8px;height:8px;border-left:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg);transition:transform .2s}
+details[open] summary::after{transform:rotate(135deg)}
+details p{padding:0 14px 12px;color:var(--muted);font-size:15px}
 
-.admin-only{display:none!important}
-body.admin .admin-only{display:inline-flex!important;align-items:center;justify-content:center}
-
-@media (min-width:900px){
-  .wrap{max-width:820px}
-  .netnote{width:min(100% - 32px,820px)}
-  h1{font-size:44px}
-  .periods{grid-template-columns:1fr 1fr}
+@media (min-width:760px){
+  .wrap{max-width:720px}
   .opts{grid-template-columns:repeat(3,1fr)}
-  .bar-in{max-width:820px}
+  .appt-list{display:grid;grid-template-columns:1fr 1fr}
+  .appt-list .appt+.appt{border-top:0}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body data-v="home">
@@ -203,40 +232,62 @@ body.admin .admin-only{display:inline-flex!important;align-items:center;justify-
 <noscript><p style="padding:16px;text-align:center;background:#fff;color:#000">تحتاج هذه الأداة إلى تفعيل الجافاسكربت في المتصفح.</p></noscript>
 
 <header class="top">
-  <div class="brand"><img src="icon.png" alt="شعار واجبات باچر" width="42" height="42">واجبات باچر</div>
-  <div style="display:flex;gap:8px;align-items:center">
-    <button class="btn pri sm" id="install-btn" type="button" hidden><span class="material-icons-round" aria-hidden="true">download</span>تثبيت</button>
-    <button class="icon-btn admin-only" id="exit-admin" aria-label="الخروج من وضع المدير" onclick="exitAdmin()" style="width:auto;padding:0 12px;gap:6px;font:800 14px Cairo,sans-serif"><span class="material-icons-round">admin_panel_settings</span>وضع المدير</button>
-    <button class="icon-btn" id="theme-btn" aria-label="تبديل المظهر" onclick="toggleTheme()"></button>
+  <div class="brand"><img src="icon.png" alt="" width="36" height="36">واجبات باچر</div>
+  <div class="tools">
+    <button class="icon-btn" id="install-btn" type="button" hidden aria-label="تثبيت التطبيق"><span class="material-icons-round">download</span></button>
+    <button class="icon-btn admin-only" id="exit-admin" type="button" aria-label="الخروج من وضع المدير" onclick="exitAdmin()"><span class="material-icons-round">logout</span></button>
+    <button class="icon-btn" id="theme-btn" type="button" aria-label="تبديل المظهر" onclick="toggleTheme()"></button>
+    <button class="icon-btn" id="lock-btn" type="button" aria-label="دخول المدير" onclick="openAdmin()"><span class="material-icons-round">lock</span></button>
   </div>
 </header>
 
 <div id="netnote" class="netnote" hidden><span class="material-icons-round" aria-hidden="true">cloud_off</span><span id="netnote-text"></span></div>
 <div id="upd" class="netnote" hidden><span class="material-icons-round" aria-hidden="true">system_update</span><span>يتوفر تحديث جديد للتطبيق</span><button class="btn pri sm" type="button" onclick="applyUpd()">تحديث</button></div>
 
-<section id="view-home" class="view on wrap">
-  <div class="hero">
-    <img class="hero-logo" src="icon.png" alt="شعار واجبات باچر" width="132" height="132">
+<section id="view-home" class="view on">
+  <div class="profile">
+    <img class="avatar" src="icon.png" alt="شعار واجبات باچر" width="96" height="96">
     <h1>واجبات باچر</h1>
-    <p class="tagline">أنشئ منشور الجدول والواجبات والامتحانات لقناتك على تيليجرام في دقيقة، وانسخه جاهزاً بالتنسيق الصحيح.</p>
-    <div class="next-card">
-      <span class="logo"><span class="material-icons-round">event</span></span>
-      <div><small>تاريخ المنشور القادم</small><span class="hl" id="home-next"></span></div>
-    </div>
-    <button class="btn pri big" type="button" onclick="start()">ابدأ المنشور<span class="material-icons-round">arrow_back</span></button>
-    <button class="btn ghost big admin-only" type="button" onclick="openMgr()" style="margin-top:12px"><span class="material-icons-round">settings</span>إدارة البيانات</button>
+    <p class="sub">منشور الجدول والواجبات والامتحانات لقناتك</p>
   </div>
 
-  <section class="about panel" aria-labelledby="about-title">
-    <h2 id="about-title">ما هي واجبات باچر؟</h2>
-    <p>يعرض المنشور اليوم والتاريخ، والدروس الستة في جدول ذلك اليوم، والواجبات والامتحانات مرتبة حسب المادة، واسم الناشر ومنصبه ويوزره للتواصل. تختار التاريخ فيحمّل الجدول تلقائياً من قاعدة البيانات، ثم تنسخ النص لتنشره مباشرة.</p>
-    <details><summary>كيف أنشئ منشوراً؟</summary><p>اضغط «ابدأ المنشور» وانتقل بين الخطوات الخمس: التاريخ، الدروس، الواجبات، الامتحانات، الناشر. ثم اضغط «توليد المنشور» وانسخه.</p></details>
+  <div class="group">
+    <button class="row" type="button" onclick="start()">
+      <span class="ico"><span class="material-icons-round">edit_note</span></span>
+      <span class="body"><b>منشور جديد</b><small>الجدول والواجبات والامتحانات والناشر</small></span>
+      <span class="material-icons-round chev">chevron_left</span>
+    </button>
+    <div class="row static">
+      <span class="ico soft"><span class="material-icons-round">event</span></span>
+      <span class="body"><b>تاريخ المنشور القادم</b><small id="home-next"></small></span>
+    </div>
+  </div>
+
+  <div class="sect">
+    <span>المواعيد</span>
+    <span>
+      <button class="link admin-only" type="button" onclick="openApptForm(null)">إضافة</button>
+      <button class="link" type="button" onclick="tab('appts')">عرض الكل</button>
+    </span>
+  </div>
+  <div class="group"><ul class="appt-list" id="appt-list"></ul></div>
+
+  <div class="sect"><span>عن الأداة</span></div>
+  <div class="group about">
+    <p>يعرض المنشور اليوم والتاريخ، والدروس الستة في جدول ذلك اليوم، والواجبات والامتحانات مرتبة حسب المادة، واسم الناشر ومنصبه ويوزره للتواصل.</p>
+    <details><summary>كيف أنشئ منشوراً؟</summary><p>اضغط «منشور جديد» وانتقل بين الخطوات الخمس، ثم اضغط «توليد المنشور» وانسخه.</p></details>
     <details><summary>هل أحتاج حساباً للاستخدام؟</summary><p>لا، يكفي فتح الصفحة. وتعمل دون إنترنت بعد أول فتح، بآخر بيانات محفوظة في الجهاز.</p></details>
     <details><summary>هل يظهر المنشور من اليمين إلى اليسار في تيليجرام؟</summary><p>نعم، يُنسخ النص مع علامات الاتجاه، فتظهر الفواصل والأرقام والوسوم بالترتيب الصحيح.</p></details>
-  </section>
-
+  </div>
   <p class="credit">برمجة وتطوير : رضا محمد</p>
-  <button class="lock" id="lock-btn" type="button" aria-label="دخول المدير" onclick="openAdmin()"><span class="material-icons-round">lock</span></button>
+</section>
+
+<section id="view-appts" class="view">
+  <h2 class="page-title">المواعيد</h2>
+  <div class="sect"><span>من الأحدث إلى الأقدم</span>
+    <span><button class="link admin-only" type="button" onclick="openApptForm(null)">إضافة</button></span></div>
+  <div class="group"><ul class="appt-list" id="all-appt-list"></ul></div>
+  <p class="credit">برمجة وتطوير : رضا محمد</p>
 </section>
 
 <section id="view-wiz" class="view wrap">
@@ -252,6 +303,7 @@ body.admin .admin-only{display:inline-flex!important;align-items:center;justify-
       </button>
       <button class="dnav" type="button" onclick="shiftDay(1)" aria-label="اليوم التالي"><span class="material-icons-round">chevron_left</span>اليوم التالي</button>
     </div>
+    <div class="day-note" id="day-note" hidden></div>
     <input type="date" id="g-date" class="sr-date" onchange="datePicked()" tabindex="-1" aria-hidden="true">
     <div class="quick" style="margin:16px 0 0;justify-content:center">
       <button class="chip" data-off="0" onclick="setDate(0)">اليوم</button>
@@ -291,6 +343,11 @@ body.admin .admin-only{display:inline-flex!important;align-items:center;justify-
   <button class="btn pri" id="b-next"></button>
 </div></nav>
 
+<nav class="tabbar" aria-label="التنقل">
+  <button class="tab on" data-tab="home" type="button" onclick="tab('home')"><span class="material-icons-round">home</span>الرئيسية</button>
+  <button class="tab" data-tab="new" type="button" onclick="start()"><span class="material-icons-round">edit_note</span>منشور</button>
+  <button class="tab" data-tab="appts" type="button" onclick="tab('appts')"><span class="material-icons-round">event</span>المواعيد</button>
+</nav>
 <div class="drawer-bg" id="drawer-bg" onclick="closeSheet()">
   <div class="drawer" onclick="event.stopPropagation()">
     <div class="grab"></div>
@@ -322,6 +379,20 @@ body.admin .admin-only{display:inline-flex!important;align-items:center;justify-
     <div id="mgr-body"></div>
     <p class="hint" id="mgr-hint" style="margin:0 0 14px"></p>
     <button class="btn pri big" id="mgr-add" type="button" onclick="mgrForm(null)"><span class="material-icons-round">add</span><span id="mgr-add-label">إضافة</span></button>
+  </div>
+</div>
+<div class="drawer-bg" id="appt-form-bg">
+  <div class="drawer">
+    <div class="grab"></div>
+    <div class="sheet-title"><h3 id="appt-form-title">إضافة موعد</h3>
+      <button class="icon-btn" type="button" aria-label="إغلاق" onclick="closeApptForm()"><span class="material-icons-round">close</span></button></div>
+    <div class="field"><label for="ap-title">عنوان الموعد</label><input type="text" id="ap-title" maxlength="80" placeholder="مثال: اختبار الفيزياء"></div>
+    <div class="field"><label for="ap-date">التاريخ</label><input type="date" id="ap-date"></div>
+    <p class="form-err" id="ap-err"></p>
+    <div class="form-actions">
+      <button class="btn ghost" type="button" onclick="closeApptForm()">إلغاء</button>
+      <button class="btn pri" id="ap-save" type="button" onclick="saveAppt()">إضافة</button>
+    </div>
   </div>
 </div>
 <div class="toast" id="toast"></div>
@@ -427,6 +498,7 @@ function setDateObj(d) {
     c.classList.toggle('on', sameDay(t, curDate));
   });
   loadSchedule();
+  renderDayNote();
 }
 function shiftDay(n) { const d = new Date(curDate); d.setDate(d.getDate() + n); setDateObj(d); }
 function setDate(off) { const d = new Date(); d.setDate(d.getDate() + off); setDateObj(d); }
@@ -454,6 +526,8 @@ function applyData(d) {
     PUBLISHERS = d.supervisors.map(x => ({ name: x.name, user: x.username, role: x.role ? x.role.name : '' }));
   dbSchedule = {};
   (d.schedule || []).forEach(r => { dbSchedule[r.day_index] = [r.l1, r.l2, r.l3, r.l4, r.l5, r.l6]; });
+  if (d.appointments) appts = d.appointments;
+  renderHomeAppts();
 }
 function fromCache() {
   try {
@@ -482,10 +556,11 @@ async function loadData() {
     return ok;
   }
   try {
-    const [schedule, subjects, roles, supervisors] = await Promise.all([
+    const [schedule, subjects, roles, supervisors, appointments] = await Promise.all([
       sb('schedule?select=*&order=day_index'), sb('subjects?select=name&order=id'),
-      sb('roles?select=name&order=id'), sb('supervisors?select=name,username,role:roles(name)&order=id')]);
-    const d = { schedule, subjects, roles, supervisors };
+      sb('roles?select=name&order=id'), sb('supervisors?select=name,username,role:roles(name)&order=id'),
+      sb('appointments?select=id,title,appt_date,created_at&order=created_at.desc')]);
+    const d = { schedule, subjects, roles, supervisors, appointments };
     applyData(d);
     try {
       localStorage.setItem('wj_cache', JSON.stringify(d));
@@ -722,6 +797,111 @@ async function mgrCall(fn, body, okStatus, okMsg) {
     else toast(res === 'duplicate' ? 'هذا الاسم موجود مسبقاً' : res === 'locked' ? 'محاولات كثيرة، حاول بعد 5 دقائق' : 'بيانات غير صالحة', 'error');
   } catch (e) { toast('تعذّر الحفظ (' + e.message + ')', 'error'); }
 }
+
+// ---------- المواعيد ----------
+let appts = [], editingAppt = null;
+const apptDay = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+const todayStart = () => { const t = new Date(); t.setHours(0, 0, 0, 0); return t; };
+const fmtAppt = s => apptDay(s).toLocaleDateString('ar', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+function apptCard(a, i) {
+  const past = apptDay(a.appt_date) < todayStart();
+  const li = h('li', { class: 'appt' + (past ? ' past' : '') },
+    h('div', { class: 'appt-main' }, h('h3', { text: a.title }), h('p', { class: 'appt-date' }, ic('event'), fmtAppt(a.appt_date))),
+    h('span', { class: 'pill' + (past ? '' : ' soon'), text: past ? 'منتهي' : 'قادم' }),
+    h('div', { class: 'appt-acts admin-only' },
+      h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'تعديل', onclick: () => openApptForm(a.id) }, ic('edit')),
+      h('button', { class: 'icon-btn danger', type: 'button', 'aria-label': 'حذف', onclick: () => deleteAppt(a.id) }, ic('delete'))));
+  li.style.setProperty('--i', String(i));
+  return li;
+}
+function renderHomeAppts() {
+  const recent = appts.slice(0, 5).sort((x, y) => y.appt_date.localeCompare(x.appt_date));
+  $('appt-list').replaceChildren(...(recent.length ? recent.map(apptCard) : [h('li', { class: 'appt-empty', text: 'لا توجد مواعيد بعد' })]));
+}
+function renderAllAppts() {
+  const sorted = [...appts].sort((x, y) => y.appt_date.localeCompare(x.appt_date));
+  $('all-appt-list').replaceChildren(...(sorted.length ? sorted.map(apptCard) : [h('li', { class: 'appt-empty', text: 'لا توجد مواعيد بعد' })]));
+}
+function openAllAppts() { tab('appts'); }
+function renderDayNote() {
+  const v = $('g-date').value, box = $('day-note');
+  const list = appts.filter(a => a.appt_date === v);
+  if (!list.length) { box.hidden = true; box.replaceChildren(); return; }
+  box.hidden = false;
+  box.replaceChildren(
+    h('p', { class: 'dn-title', text: list.length === 1 ? 'يوجد موعد في هذا اليوم' : `يوجد ${list.length} مواعيد في هذا اليوم` }),
+    ...list.map(a => {
+      const past = apptDay(a.appt_date) < todayStart();
+      return h('div', { class: 'dn-item' }, ic('event'), h('span', { text: a.title }),
+        h('span', { class: 'pill' + (past ? '' : ' soon'), text: past ? 'منتهي' : 'قادم' }));
+    }));
+}
+function tab(t) {
+  view(t);
+  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('on', b.dataset.tab === t));
+  if (t === 'appts') renderAllAppts();
+}
+function openApptForm(id) {
+  editingAppt = id ?? null;
+  const a = id ? appts.find(x => x.id === id) : null;
+  $('appt-form-title').textContent = a ? 'تعديل الموعد' : 'إضافة موعد';
+  $('ap-save').textContent = a ? 'حفظ التعديل' : 'إضافة';
+  $('ap-title').value = a ? a.title : '';
+  $('ap-date').value = a ? a.appt_date : '';
+  $('ap-err').textContent = '';
+  $('appt-form-bg').classList.add('on');
+  setTimeout(() => $('ap-title').focus(), 200);
+}
+function closeApptForm() { $('appt-form-bg').classList.remove('on'); }
+async function apiAppt(fn, body, okMsg) {
+  try {
+    const r = await sb('rpc/' + fn, { pw: adminPw, ...body });
+    if (r === 'saved' || r === 'deleted') { toast(okMsg); await loadAppts(); return true; }
+    if (r === 'wrong' || r === 'none') { toast('كلمة المرور لم تعد صحيحة', 'error'); exitAdmin(); }
+    else if (r === 'locked') toast('محاولات كثيرة، حاول بعد 5 دقائق', 'error');
+    else toast('بيانات غير صالحة', 'error');
+  } catch (e) { toast('تعذّر الاتصال (' + e.message + ')', 'error'); }
+  return false;
+}
+async function saveAppt() {
+  const title = $('ap-title').value.trim(), date = $('ap-date').value;
+  if (!title) { $('ap-err').textContent = 'اكتب عنوان الموعد'; return; }
+  if (!date) { $('ap-err').textContent = 'اختر تاريخ الموعد'; return; }
+  const ok = await apiAppt('admin_save_appointment', { p_id: editingAppt, p_title: title, p_date: date },
+    editingAppt ? 'تم حفظ التعديل' : 'تمت إضافة الموعد');
+  if (ok) closeApptForm();
+}
+async function deleteAppt(id) {
+  if (!confirm('حذف هذا الموعد؟')) return;
+  await apiAppt('admin_delete_appointment', { p_id: id }, 'تم الحذف');
+}
+async function loadAppts() {
+  const rows = await sb('appointments?select=id,title,appt_date,created_at&order=created_at.desc');
+  appts = rows || [];
+  renderHomeAppts();
+  if (document.getElementById('view-appts').classList.contains('on')) renderAllAppts();
+  renderDayNote();
+  try { const c = JSON.parse(localStorage.getItem('wj_cache') || 'null'); if (c) { c.appointments = appts; localStorage.setItem('wj_cache', JSON.stringify(c)); } } catch {}
+  return rows;
+}
+// تأثير الضغط على الأزرار الأساسية
+document.addEventListener('pointerdown', e => {
+  const b = e.target.closest('.btn.pri.big'); if (!b) return;
+  const r = b.getBoundingClientRect(), sz = Math.max(r.width, r.height), d = document.createElement('span');
+  d.className = 'ripple';
+  d.style.cssText = `width:${sz}px;height:${sz}px;left:${e.clientX - r.left - sz / 2}px;top:${e.clientY - r.top - sz / 2}px`;
+  b.append(d); setTimeout(() => d.remove(), 650);
+});
+
+new MutationObserver(() => document.body.classList.toggle('lock', !!document.querySelector('.drawer-bg.on')))
+  .observe(document.body, { subtree: true, attributes: true, attributeFilter: ['class'] });
+document.addEventListener('pointerdown', e => {
+  const b = e.target.closest('.btn.pri.big'); if (!b) return;
+  const r = b.getBoundingClientRect(), sz = Math.max(r.width, r.height), d = document.createElement('span');
+  d.className = 'ripple';
+  d.style.cssText = `width:${sz}px;height:${sz}px;left:${e.clientX - r.left - sz / 2}px;top:${e.clientY - r.top - sz / 2}px`;
+  b.append(d); setTimeout(() => d.remove(), 650);
+});
 
 // ---------- التشغيل ----------
 function fillRoles() { $('u-role').replaceChildren(...ROLES.map(r => opt(r))); }

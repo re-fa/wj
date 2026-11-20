@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rmsup.site/sitemap.xml
+Sitemap: https://post.rmsup.site/sitemap.xml
