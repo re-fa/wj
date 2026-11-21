@@ -1,4 +1,4 @@
-const CACHE = 'wj-v6';
+const CACHE = 'wj-v15';
 const SHELL = ['./', './index.html', './manifest.json', './icon.png', './icon-192.png',
   './icon-512.png', './icon-maskable-512.png', './apple-touch-icon.png'];
 

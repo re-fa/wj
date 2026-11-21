@@ -64,13 +64,13 @@ body.admin .admin-only{display:inline-flex!important;align-items:center;justify-
 
 /* الشريط العلوي */
 .top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:8px;
-  padding:calc(8px + env(safe-area-inset-top)) 12px 8px;background:var(--green);color:#fff;box-shadow:0 1px 0 rgba(0,0,0,.1)}
-.brand{display:flex;align-items:center;gap:10px;font:800 18px Cairo,sans-serif;color:#fff}
+  padding:calc(8px + env(safe-area-inset-top)) 12px 8px;background:var(--top-bg);color:var(--top-ink);border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(0,0,0,.1)}
+.brand{display:flex;align-items:center;gap:10px;font:800 18px Cairo,sans-serif;color:var(--top-ink)}
 .brand img{width:36px;height:36px;border-radius:50%;border:2px solid var(--gold);background:#fff}
 .tools{display:flex;gap:4px;align-items:center}
 .icon-btn{width:40px;height:40px;flex:none;display:inline-grid;place-items:center;border:0;border-radius:50%;
-  background:rgba(255,255,255,.12);color:#fff;cursor:pointer;transition:background .2s,transform .12s}
-.icon-btn:hover{background:rgba(255,255,255,.22)}
+  background:var(--field);color:var(--top-ink);cursor:pointer;transition:background .2s,transform .12s}
+.icon-btn:hover{background:var(--ghost-h)}
 .icon-btn:active{transform:scale(.92)}
 .icon-btn.danger{color:var(--danger)}
 .panel .icon-btn,.drawer .icon-btn,.appt-acts .icon-btn,.mrow .icon-btn,.entry .icon-btn{background:var(--field);color:var(--ink)}
@@ -225,6 +225,131 @@ details p{padding:0 14px 12px;color:var(--muted);font-size:15px}
   .appt-list .appt+.appt{border-top:0}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* تحسينات تجربة الاستخدام */
+.icon-btn{width:44px;height:44px}
+.appt-acts .icon-btn,.mrow .icon-btn{width:40px;height:40px}
+.chip{min-height:40px}
+.row:active,.appt:active{background:var(--ghost-h)}
+.btn.ok{background:var(--ok)!important;color:#fff!important}
+.appt-empty{display:flex;flex-direction:column;align-items:center;gap:6px;padding:22px 16px}
+.appt-empty .material-icons-round{font-size:32px;color:var(--gold)}
+.empty{display:flex;flex-direction:column;align-items:center;gap:6px}
+.empty .material-icons-round{font-size:30px;color:var(--gold)}
+.field input,.field select{min-height:48px}
+.bar .btn{min-height:50px}
+.tab:focus-visible{border-radius:12px}
+@media (prefers-reduced-motion:reduce){.btn.ok{transition:none}}
+
+/* ===== الإصدار v5.37: تنقل عائم، نوافذ منتصف الشاشة ===== */
+.tabbar{left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));border-radius:26px;border-top:0;padding:6px;box-shadow:0 8px 28px rgba(14,40,30,.16);overflow:hidden;position:fixed}
+.tab{position:relative;z-index:1;height:50px;border-radius:20px;transition:color .3s}
+.tab .material-icons-round{transition:transform .3s var(--ease)}
+.tab.on .material-icons-round{transform:translateY(-1px) scale(1.08)}
+.tab-ind{position:absolute;top:6px;bottom:6px;left:6px;width:0;border-radius:20px;background:var(--gold-l);transition:left .42s var(--ease),width .42s var(--ease);z-index:0}
+body[data-v=wiz] .tabbar{display:flex}
+body[data-v=wiz] .bar{bottom:calc(86px + env(safe-area-inset-bottom))}
+body[data-v=wiz]{padding-bottom:calc(170px + env(safe-area-inset-bottom))}
+.cta-new{background:var(--gold);color:var(--green);font:800 18px Cairo,sans-serif;box-shadow:0 8px 20px -10px rgba(201,162,74,.8);margin:0 12px 14px;width:calc(100% - 24px);height:56px;border-radius:16px}
+.cta-new:hover{background:#D9B35C}
+.cta-new .material-icons-round{color:var(--green)}
+.copy{text-align:center;color:var(--muted);font-size:13px;font-weight:700;padding:16px 12px 6px;line-height:1.8}
+.copy b{color:var(--green)}
+.appt.tap{cursor:pointer}
+.appt.tap:hover{background:var(--field)}
+
+/* النوافذ: في منتصف الشاشة */
+.drawer-bg{align-items:center;justify-content:center;padding:16px}
+.drawer{position:relative;max-width:460px;max-height:86vh;border-radius:22px;padding:18px 18px 16px;animation:pop .28s var(--ease)}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
+.grab{display:none}
+.drawer .sheet-title{padding-inline-start:0}
+.drawer .icon-btn[aria-label="إغلاق"]{order:-1;width:36px;height:36px;background:var(--field);color:var(--ink)}
+.drawer .x-close{position:absolute;top:12px;inset-inline-start:12px;width:36px;height:36px;display:grid;place-items:center;border:0;border-radius:50%;background:var(--field);color:var(--ink);cursor:pointer;z-index:2}
+.drawer .x-close:hover{background:var(--ghost-h)}
+.drawer-foot{margin-top:14px}
+.drawer-foot .btn{width:100%}
+.drawer h3{padding-inline-start:44px}
+.opts{grid-template-columns:1fr}
+.opts .opt{text-align:center}
+.av-date{color:var(--muted);font-weight:600;margin:4px 0 10px}
+.danger-btn{color:var(--danger)!important}
+
+/* ===== لوحة الألوان (v5.37.1) ===== */
+.top .icon-btn{background:var(--top-btn);color:var(--top-ink);border:1px solid rgba(255,255,255,.12)}
+.top .icon-btn:hover{background:var(--top-btn-h)}
+.top .icon-btn .material-icons-round{color:var(--top-ink)}
+.top .icon-btn.lock-on{background:var(--gold)!important;color:#0E4D3A!important}
+body{padding-bottom:calc(112px + env(safe-area-inset-bottom))}
+body[data-v=wiz]{padding-bottom:calc(170px + env(safe-area-inset-bottom))}
+:root{
+  --bg:#F2F5F1; --paper:#FFFFFF; --ink:#15241D; --muted:#5B6D63; --line:#DDE6DF; --field:#F2F6F2; --ghost-h:#E9F1EB;
+  --green:#0E4D3A; --green-2:#1B7A57; --green-h:#0A3B2B; --gold:#C9A24A; --gold-l:#F6EBCB;
+  --cta-bg:#C9A24A; --cta-h:#B8923C; --cta-ink:#0E2E23;
+  --top-bg:#0E4D3A; --top-ink:#FFFFFF; --top-btn:rgba(255,255,255,.16); --top-btn-h:rgba(255,255,255,.28); --on-green:#FFFFFF; --ok:#1B7A57; --ok-bg:#E2F2E9; --bad-bg:#FBE3E0; --danger:#B3261E; --bubble:#DDF0E5; --focus:#1B7A57;
+}
+:root.dark{
+  --bg:#0C1613; --paper:#14231D; --ink:#E9F2ED; --muted:#A3B8AE; --line:#29413A; --field:#1B2F28; --ghost-h:#22382F;
+  --green:#86D4AD; --green-2:#55B98F; --green-h:#B2E8CD; --gold:#DDB65F; --gold-l:#3A3119;
+  --cta-bg:#DDB65F; --cta-h:#E8C676; --cta-ink:#0C1613;
+  --top-bg:#14231D; --top-ink:#E9F2ED; --top-btn:#22382F; --top-btn-h:#2C4840; --on-green:#0C1613; --ok:#86D4AD; --ok-bg:#183A2D; --bad-bg:#3E211F; --danger:#FF9187; --bubble:#1D3B31; --focus:#DDB65F;
+}
+.cta-new{background:var(--cta-bg);color:var(--cta-ink);box-shadow:0 8px 20px -10px rgba(0,0,0,.45)}
+.cta-new:hover{background:var(--cta-h)}
+.cta-new .material-icons-round{color:var(--cta-ink)}
+.tab-ind{background:var(--gold-l)}
+.day-note{background:var(--gold-l)}
+
+/* ===== v5.37.3: تصميم موحد للنوافذ ===== */
+:root{--modal-bg:#FFFFFF;--modal-line:#E3EAE5;--danger-soft:#FBE3E0}
+:root.dark{--modal-bg:#14231D;--modal-line:#2A4238;--danger-soft:#3E211F}
+.drawer{background:var(--modal-bg);border:1px solid var(--modal-line);box-shadow:0 24px 60px -20px rgba(0,0,0,.45);padding:20px 20px 18px;max-width:420px;border-radius:22px}
+.drawer .sheet-title{margin:0 0 4px;padding-inline-start:0;align-items:center}
+.drawer .sheet-title h3{font-size:20px;line-height:1.4;padding-inline-start:0;margin:0;flex:1;color:var(--green)}
+.drawer .sheet-title .icon-btn{order:-1;width:38px;height:38px;flex:none;background:var(--field);color:var(--ink);border:1px solid var(--modal-line);box-shadow:none}
+.drawer h3{padding-inline-start:0}
+.drawer .x-close{top:16px;inset-inline-start:16px;width:38px;height:38px;border:1px solid var(--modal-line)}
+.drawer .opts{margin-top:8px}
+.drawer .opt{min-height:50px;font-size:16px}
+.drawer .field{margin-bottom:12px}
+.drawer .field label{font-size:14px;margin-bottom:6px}
+.drawer .field input{height:50px}
+.drawer .form-err{margin-bottom:4px}
+.drawer .form-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.drawer .form-actions .btn{width:100%;height:50px;margin:0}
+.drawer-foot{margin-top:12px;padding-top:12px;border-top:1px solid var(--modal-line)}
+.drawer-foot .btn{height:48px;font-weight:700}
+.av-status{margin:10px 0 14px}
+.av-date{margin:0;font-size:15px;color:var(--muted);font-weight:600}
+.av-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;padding-top:14px;border-top:1px solid var(--modal-line)}
+.av-actions .btn{width:100%;height:50px;margin:0;justify-content:center}
+.av-actions .btn .material-icons-round{font-size:20px;width:auto;height:auto}
+.btn.danger{background:var(--danger-soft);color:var(--danger);border:1px solid transparent}
+.btn.danger:hover{filter:brightness(.97)}
+.drawer .btn.ghost{background:var(--paper);border:1px solid var(--modal-line)}
+.drawer .opt{border:1px solid var(--modal-line)}
+.drawer .mrow{border:1px solid var(--modal-line)}
+#av-title{white-space:normal}
+
+body.admin .av-actions{display:grid!important}
+.av-actions[hidden],.admin-only:not(body.admin *){display:none!important}
+.day-note{background:var(--paper);border:1px solid var(--line);border-inline-start:4px solid var(--gold);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow);color:var(--ink)}
+.dn-title{font-size:14px;font-weight:700;color:var(--muted);margin:0 0 4px}
+.dn-item{padding:8px 0;border-top:1px solid var(--line);font-size:15px;font-weight:700;color:var(--ink)}
+.dn-item:first-of-type{border-top:0}
+.dn-item .material-icons-round{color:var(--muted);font-size:18px}
+.dn-item .pill{margin-inline-start:auto}
+
+.drawer > h3,#drawer-title{padding-inline-start:52px;padding-inline-end:0;min-height:38px;display:flex;align-items:center}
+.drawer .x-close{top:14px;inset-inline-start:14px}
+.drawer .sheet-title{min-height:38px}
+/* v5.37.6 */
+:root{--alert-bg:#FDECEA;--alert-line:#F2B8B2;--alert-ink:#8A2A22;--alert-accent:#D9534F}
+:root.dark{--alert-bg:#3A1E1C;--alert-line:#6B2F2B;--alert-ink:#FFC9C2;--alert-accent:#FF7A70}
+.day-note{margin:12px 0 14px;background:var(--alert-bg);border:1px solid var(--alert-line);border-inline-start:4px solid var(--alert-accent);box-shadow:none}
+.dn-title{color:var(--alert-ink)}
+.dn-item{border-top:1px solid var(--alert-line)}
+.dn-item .material-icons-round{color:var(--alert-accent)}
 </style>
 </head>
 <body data-v="home">
@@ -251,12 +376,8 @@ details p{padding:0 14px 12px;color:var(--muted);font-size:15px}
     <p class="sub">منشور الجدول والواجبات والامتحانات لقناتك</p>
   </div>
 
+  <button class="btn cta-new" type="button" onclick="start()"><span class="material-icons-round">edit_note</span>منشور جديد</button>
   <div class="group">
-    <button class="row" type="button" onclick="start()">
-      <span class="ico"><span class="material-icons-round">edit_note</span></span>
-      <span class="body"><b>منشور جديد</b><small>الجدول والواجبات والامتحانات والناشر</small></span>
-      <span class="material-icons-round chev">chevron_left</span>
-    </button>
     <div class="row static">
       <span class="ico soft"><span class="material-icons-round">event</span></span>
       <span class="body"><b>تاريخ المنشور القادم</b><small id="home-next"></small></span>
@@ -279,12 +400,12 @@ details p{padding:0 14px 12px;color:var(--muted);font-size:15px}
     <details><summary>هل أحتاج حساباً للاستخدام؟</summary><p>لا، يكفي فتح الصفحة. وتعمل دون إنترنت بعد أول فتح، بآخر بيانات محفوظة في الجهاز.</p></details>
     <details><summary>هل يظهر المنشور من اليمين إلى اليسار في تيليجرام؟</summary><p>نعم، يُنسخ النص مع علامات الاتجاه، فتظهر الفواصل والأرقام والوسوم بالترتيب الصحيح.</p></details>
   </div>
-  <p class="credit">برمجة وتطوير : رضا محمد</p>
+  <div class="copy">حقوق الطبع والنشر محفوظة © 2026 واجبات باچر<br>الإصدار <b>v5.37.6</b> · برمجة وتطوير : رضا محمد</div>
 </section>
 
 <section id="view-appts" class="view">
   <h2 class="page-title">المواعيد</h2>
-  <div class="sect"><span>من الأحدث إلى الأقدم</span>
+  <div class="sect"><span>من الأقرب إلى الأبعد</span>
     <span><button class="link admin-only" type="button" onclick="openApptForm(null)">إضافة</button></span></div>
   <div class="group"><ul class="appt-list" id="all-appt-list"></ul></div>
   <p class="credit">برمجة وتطوير : رضا محمد</p>
@@ -312,6 +433,7 @@ details p{padding:0 14px 12px;color:var(--muted);font-size:15px}
   </div>
 
   <div class="step panel" id="step-2">
+      <div class="day-note" id="day-note-2" hidden></div>
     <p class="hint" style="margin:0"><span class="material-icons-round">touch_app</span>انقر على المادة لاختيارها من القائمة، أو على القلم للكتابة بنفسك.</p>
     <div class="periods" id="u-lessons"></div>
     <button class="btn ghost big admin-only" id="save-sched" type="button" onclick="saveSchedule()" disabled style="margin-top:16px"><span class="material-icons-round">save</span><span id="save-label">حفظ في قاعدة البيانات</span></button>
@@ -335,7 +457,8 @@ details p{padding:0 14px 12px;color:var(--muted);font-size:15px}
     <div><label for="u-contact">التواصل (Telegram)</label><input type="text" id="u-contact" placeholder="@username" dir="ltr"></div>
   </div>
 
-  <div class="step" id="step-6"><div class="bubble" id="result"></div></div>
+  <div class="step" id="step-6">
+      <div class="day-note" id="day-note-6" hidden></div><div class="bubble" id="result"></div></div>
 </section>
 
 <nav class="bar"><div class="bar-in">
@@ -344,6 +467,7 @@ details p{padding:0 14px 12px;color:var(--muted);font-size:15px}
 </div></nav>
 
 <nav class="tabbar" aria-label="التنقل">
+  <span class="tab-ind" id="tab-ind"></span>
   <button class="tab on" data-tab="home" type="button" onclick="tab('home')"><span class="material-icons-round">home</span>الرئيسية</button>
   <button class="tab" data-tab="new" type="button" onclick="start()"><span class="material-icons-round">edit_note</span>منشور</button>
   <button class="tab" data-tab="appts" type="button" onclick="tab('appts')"><span class="material-icons-round">event</span>المواعيد</button>
@@ -392,6 +516,18 @@ details p{padding:0 14px 12px;color:var(--muted);font-size:15px}
     <div class="form-actions">
       <button class="btn ghost" type="button" onclick="closeApptForm()">إلغاء</button>
       <button class="btn pri" id="ap-save" type="button" onclick="saveAppt()">إضافة</button>
+    </div>
+  </div>
+</div>
+<div class="drawer-bg" id="appt-view-bg">
+  <div class="drawer" role="dialog" aria-modal="true" aria-labelledby="av-title">
+    <div class="sheet-title"><h3 id="av-title"></h3>
+      <button class="icon-btn" type="button" aria-label="إغلاق" onclick="closeBg(document.getElementById('appt-view-bg'))"><span class="material-icons-round">close</span></button></div>
+    <p class="av-date" id="av-date"></p>
+    <div class="av-status"><span class="pill" id="av-pill"></span></div>
+    <div class="av-actions admin-only" id="av-admin">
+      <button class="btn ghost" type="button" id="av-edit"><span class="material-icons-round">edit</span>تعديل</button>
+      <button class="btn danger" type="button" id="av-del"><span class="material-icons-round">delete</span>حذف</button>
     </div>
   </div>
 </div>
@@ -528,6 +664,7 @@ function applyData(d) {
   (d.schedule || []).forEach(r => { dbSchedule[r.day_index] = [r.l1, r.l2, r.l3, r.l4, r.l5, r.l6]; });
   if (d.appointments) appts = d.appointments;
   renderHomeAppts();
+  if (typeof renderDayNote === 'function') renderDayNote();
 }
 function fromCache() {
   try {
@@ -903,6 +1040,190 @@ document.addEventListener('pointerdown', e => {
   b.append(d); setTimeout(() => d.remove(), 650);
 });
 
+
+// ---------- تحسينات تجربة الاستخدام ----------
+const _renderHomeAppts = renderHomeAppts;
+renderHomeAppts = function () {
+  _renderHomeAppts();
+  if (!appts.length) {
+    const admin = document.body.classList.contains('admin');
+    $('appt-list').replaceChildren(h('li', { class: 'appt-empty' },
+      ic('event_available'), h('span', { text: 'لا توجد مواعيد بعد' }),
+      h('small', { style: 'color:var(--muted)', text: admin ? 'اضغط إضافة لإنشاء أول موعد' : 'ستظهر المواعيد هنا عند إضافتها' })));
+  }
+};
+const _copyResult = copyResult;
+copyResult = async function () {
+  await _copyResult();
+  const nb = $('b-next');
+  const prev = nb.textContent;
+  nb.replaceChildren(ic('check'), 'تم النسخ');
+  nb.classList.add('ok');
+  setTimeout(() => { nb.classList.remove('ok'); nb.replaceChildren(prev); }, 2200);
+};
+
+
+// ===== v5.37 =====
+function closeBg(bg) {
+  if (!bg) return;
+  bg.classList.remove('on');
+  bg.querySelectorAll('input,textarea').forEach(i => { i.value = ''; });
+  bg.querySelectorAll('.form-err').forEach(e => { e.textContent = ''; });
+}
+closeApptForm = () => closeBg($('appt-form-bg'));
+closeMgr = () => closeBg($('mgr-bg'));
+closeAdmin = () => closeBg($('admin-bg'));
+closeSheet = () => closeBg($('drawer-bg'));
+function openList(title, items, current, onPick) {
+  openedAt = Date.now();
+  $('drawer-title').textContent = title;
+  $('opts').replaceChildren(...items.map(it => h('button', {
+    class: 'opt' + (String(it.value) === String(current) ? ' sel' : ''), type: 'button', text: it.label,
+    onclick: () => { closeBg($('drawer-bg')); onPick(it.value); }
+  })));
+  $('drawer-bg').classList.add('on');
+}
+openSheet = (id, list, title, onPick) => {
+  const cur = $(id).value;
+  openList(title, list.map(x => typeof x === 'string' ? { value: x, label: x } : x), cur, v => {
+    $(id).value = v; $(id).dispatchEvent(new Event('input', { bubbles: true })); if (onPick) onPick(v);
+  });
+};
+// كل قائمة اختيار تفتح نافذة في المنتصف
+let openedAt = 0;
+document.addEventListener('pointerdown', e => {
+  if (e.target.closest && e.target.closest('select')) e.preventDefault();
+}, true);
+document.addEventListener('click', e => {
+  const sel = e.target.closest && e.target.closest('select');
+  if (!sel || sel.disabled) return;
+  e.preventDefault();
+  openList(sel.getAttribute('aria-label') || 'اختر', [...sel.options].map(o => ({ value: o.value, label: o.text })), sel.value, v => {
+    sel.value = v; sel.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+}, true);
+
+// نافذة الموعد عند الضغط عليه
+function openApptView(id) {
+  const a = appts.find(x => x.id === id); if (!a) return;
+  const past = apptDay(a.appt_date) < todayStart();
+  $('av-title').textContent = a.title;
+  $('av-date').textContent = fmtAppt(a.appt_date);
+  $('av-pill').textContent = past ? 'منتهي' : 'قادم';
+  $('av-pill').className = 'pill' + (past ? '' : ' soon');
+  $('av-edit').onclick = () => { closeBg($('appt-view-bg')); openApptForm(id); };
+  $('av-del').onclick = () => { closeBg($('appt-view-bg')); deleteAppt(id); };
+  $('appt-view-bg').classList.add('on');
+}
+const _apptCard = apptCard;
+apptCard = function (a, i) {
+  const li = _apptCard(a, i);
+  li.classList.add('tap');
+  li.addEventListener('click', e => { if (!e.target.closest('.appt-acts')) openApptView(a.id); });
+  return li;
+};
+
+// شريط التنقل: مؤشر متحرك للتبويب النشط
+function moveInd(t) {
+  const btn = document.querySelector(`.tab[data-tab="${t}"]`), ind = $('tab-ind');
+  if (!btn || !ind) return;
+  ind.style.left = btn.offsetLeft + 'px';
+  ind.style.width = btn.offsetWidth + 'px';
+}
+function setTabActive(t) {
+  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('on', b.dataset.tab === t));
+  moveInd(t);
+}
+const _tab = tab;
+tab = function (t) { _tab(t); setTabActive(t); };
+const _start = start;
+start = function () { _start(); setTabActive('new'); };
+
+// كل نافذة: زر X أعلى اليمين، وزر إغلاق سفلي، والإغلاق عند الضغط خارجها
+document.querySelectorAll('.drawer-bg').forEach(bg => {
+  const d = bg.querySelector('.drawer'); if (!d) return;
+  if (!d.querySelector('[aria-label="إغلاق"]')) {
+    d.prepend(h('button', { class: 'x-close', type: 'button', 'aria-label': 'إغلاق', onclick: () => closeBg(bg) }, ic('close')));
+  }
+  if (!d.querySelector('.drawer-foot')) {
+    d.append(h('div', { class: 'drawer-foot' }, h('button', { class: 'btn ghost', type: 'button', text: 'إغلاق', onclick: () => closeBg(bg) })));
+  }
+  bg.addEventListener('click', e => { if (e.target === bg && Date.now() - openedAt > 400) closeBg(bg); });
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.drawer-bg.on').forEach(closeBg); });
+
+
+// ===== v5.37.4: المواعيد =====
+const isAdminMode = () => document.body.classList.contains('admin');
+function sortAppts(list) {
+  const t = todayStart();
+  return [...list].sort((a, b) => {
+    const pa = apptDay(a.appt_date) < t, pb = apptDay(b.appt_date) < t;
+    if (pa !== pb) return pa ? 1 : -1;               // القادمة أولاً، ثم المنتهية
+    return pa ? b.appt_date.localeCompare(a.appt_date) : a.appt_date.localeCompare(b.appt_date);
+  });
+}
+apptCard = function (a, i) {
+  const past = apptDay(a.appt_date) < todayStart();
+  const kids = [
+    h('div', { class: 'appt-main' }, h('h3', { text: a.title }), h('p', { class: 'appt-date' }, ic('event'), fmtAppt(a.appt_date))),
+    h('span', { class: 'pill' + (past ? '' : ' soon'), text: past ? 'منتهي' : 'قادم' })
+  ];
+  if (isAdminMode()) kids.push(h('div', { class: 'appt-acts' },
+    h('button', { class: 'icon-btn', type: 'button', 'aria-label': 'تعديل', onclick: e => { e.stopPropagation(); openApptForm(a.id); } }, ic('edit')),
+    h('button', { class: 'icon-btn danger', type: 'button', 'aria-label': 'حذف', onclick: e => { e.stopPropagation(); deleteAppt(a.id); } }, ic('delete'))));
+  const li = h('li', { class: 'appt tap' + (past ? ' past' : '') }, ...kids);
+  li.style.setProperty('--i', String(i));
+  li.addEventListener('click', () => openApptView(a.id));
+  return li;
+};
+renderHomeAppts = function () {
+  const recent = sortAppts(appts.slice(0, 5));          // آخر 5 مضافة، مرتبة من الأقرب للأبعد
+  $('appt-list').replaceChildren(...(recent.length ? recent.map(apptCard) : [h('li', { class: 'appt-empty' },
+    ic('event_available'), h('span', { text: 'لا توجد مواعيد بعد' }),
+    h('small', { style: 'color:var(--muted)', text: isAdminMode() ? 'اضغط إضافة لإنشاء أول موعد' : 'ستظهر المواعيد هنا عند إضافتها' }))]));
+};
+renderAllAppts = function () {
+  const sorted = sortAppts(appts);
+  $('all-appt-list').replaceChildren(...(sorted.length ? sorted.map(apptCard) : [h('li', { class: 'appt-empty', text: 'لا توجد مواعيد بعد' })]));
+};
+let lastAdminMode = isAdminMode();
+new MutationObserver(() => {
+  const now = isAdminMode();
+  if (now === lastAdminMode) return;
+  lastAdminMode = now;
+  renderHomeAppts();
+  if (document.getElementById('view-appts').classList.contains('on')) renderAllAppts();
+}).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+openApptView = function (id) {
+  const a = appts.find(x => x.id === id); if (!a) return;
+  const past = apptDay(a.appt_date) < todayStart();
+  $('av-title').textContent = a.title;
+  $('av-date').textContent = fmtAppt(a.appt_date);
+  $('av-pill').textContent = past ? 'منتهي' : 'قادم';
+  $('av-pill').className = 'pill' + (past ? '' : ' soon');
+  $('av-admin').hidden = !isAdminMode();
+  $('av-edit').onclick = () => { closeBg($('appt-view-bg')); openApptForm(id); };
+  $('av-del').onclick = () => { closeBg($('appt-view-bg')); deleteAppt(id); };
+  $('appt-view-bg').classList.add('on');
+};
+renderDayNote = function () {
+  const v = $('g-date').value;
+  const list = sortAppts(appts.filter(a => a.appt_date === v));
+  ['day-note', 'day-note-2', 'day-note-6'].forEach(id => {
+    const box = $(id); if (!box) return;
+    if (!list.length) { box.hidden = true; box.replaceChildren(); return; }
+    box.hidden = false;
+    box.replaceChildren(
+      h('p', { class: 'dn-title', text: list.length === 1 ? 'يوجد موعد في هذا اليوم' : `يوجد ${list.length} مواعيد في هذا اليوم` }),
+      ...list.map(a => {
+        const past = apptDay(a.appt_date) < todayStart();
+        return h('div', { class: 'dn-item' }, ic('event'), h('span', { text: a.title }),
+          h('span', { class: 'pill' + (past ? '' : ' soon'), text: past ? 'منتهي' : 'قادم' }));
+      }));
+  });
+};
+
 // ---------- التشغيل ----------
 function fillRoles() { $('u-role').replaceChildren(...ROLES.map(r => opt(r))); }
 function defaultPublisher() {
@@ -911,6 +1232,7 @@ function defaultPublisher() {
   pickPublisher(PUBLISHERS[0].name);
 }
 (async function boot() {
+  setTimeout(() => setTabActive('home'), 0);
   let saved = null; try { saved = localStorage.getItem('theme'); } catch {}
   applyTheme(saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches);
   if (document.fonts) document.fonts.load('22px "Material Icons Round"', 'menu_book')
