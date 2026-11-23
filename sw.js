@@ -1,6 +1,10 @@
-const CACHE = 'wj-v15';
-const SHELL = ['./', './index.html', './manifest.json', './icon.png', './icon-192.png',
-  './icon-512.png', './icon-maskable-512.png', './apple-touch-icon.png'];
+const CACHE = 'wj-v26.11.23';
+const SHELL = [
+  './', './index.html', './manifest.json',
+  './assets/css/styles.css', './assets/js/app.js',
+  './images/icon.png', './images/icon-192.png', './images/icon-512.png',
+  './images/icon-maskable-512.png', './images/apple-touch-icon.png'
+];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)));
@@ -25,7 +29,6 @@ self.addEventListener('fetch', e => {
   if (!url.protocol.startsWith('http')) return;
   // بيانات Supabase تُدار من الصفحة نفسها (localStorage)، ولا نخزّنها هنا
   if (url.hostname.endsWith('supabase.co')) return;
-
   if (req.mode === 'navigate' || url.pathname.endsWith('/') || url.pathname.endsWith('.html')) {
     e.respondWith(networkFirst(req));
   } else {
@@ -50,7 +53,7 @@ async function cacheFirst(req) {
   if (hit) return hit;
   try {
     const res = await fetch(req);
-    if (res.ok || res.type === 'opaque') cache.put(req, res.clone());
+    if (res.ok) cache.put(req, res.clone());
     return res;
   } catch {
     return Response.error();
